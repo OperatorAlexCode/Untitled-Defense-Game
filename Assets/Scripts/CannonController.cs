@@ -177,6 +177,9 @@ public class CannonController : MonoBehaviour
         rigidBody.mass = mass;
         rigidBody.drag = drag;
 
+        cannonBall.AddComponent<ProjectileController>();
+        cannonBall.GetComponent<ProjectileController>().LifeTime = 3.0f;
+
         return cannonBall;
     }
 }
