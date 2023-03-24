@@ -7,20 +7,24 @@ using static UnityEditor.FilePathAttribute;
 public class CannonController : MonoBehaviour
 {
     // float | Projectile
-    public float BallRadius;
-    public float RotationSpeed;
-    public float CannonBallMass;
-    public float CannonBallDrag;
+    public float[] ProjectileRadius;
+    public float[] PojectileMass;
+    public float[] ProjectileDrag;
+    public float[] ProjectileLifetime;
 
     // float | Cannon
     public float ShotForce;
+    public float RotationSpeed;
     public float RotationUpMax;
     public float RotationDownMin;
     public float RotationYMinMax;
     float CurrentAngle;
     float CurrentRotation;
 
-    // GameOvject
+    // int
+    public int[] ReserveAmmo;
+
+    // GameObject
     public GameObject Turret;
     public GameObject Barrel;
     public GameObject ShotDir;
@@ -101,12 +105,12 @@ public class CannonController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(UpTurnKey))
+        if (Input.GetKey(UpTurnKey) && !Input.GetKey(DownTurnKey))
         {
-            if (CurrentAngle + rotationamount > RotationUpMax)
+            if (CurrentAngle + rotationamount > RotationUpMax && CurrentAngle !>= RotationUpMax)
             {
                 barrelRotation = new Vector3(BarrelStartRotation.x + RotationUpMax, barrelRotation.y, barrelRotation.z);
-                CurrentAngle = BarrelStartRotation.x + RotationUpMax;
+                CurrentAngle = RotationUpMax;
             }
 
             else
@@ -116,12 +120,12 @@ public class CannonController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(DownTurnKey))
+        if (Input.GetKey(DownTurnKey) && !Input.GetKey(UpTurnKey))
         {
-            if (CurrentAngle - rotationamount < RotationDownMin)
+            if (CurrentAngle - rotationamount < -RotationDownMin && CurrentAngle !<= -RotationDownMin)
             {
                 barrelRotation = new Vector3(BarrelStartRotation.x - RotationDownMin, barrelRotation.y, barrelRotation.z);
-                CurrentAngle = RotationDownMin;
+                CurrentAngle = -RotationDownMin;
             }   
 
             else
@@ -135,7 +139,7 @@ public class CannonController : MonoBehaviour
 
     void CannonBall()
     {
-        GameObject newBall = CreateProjectile("Cannon Ball", ShotDir.transform.position, CannonBallMat, BallRadius, CannonBallMass, CannonBallDrag);
+        GameObject newBall = CreateProjectile("Cannon Ball", ShotDir.transform.position, CannonBallMat, ProjectileRadius[(int)ShotType.CannonBall], PojectileMass[(int)ShotType.CannonBall], ProjectileDrag[(int)ShotType.CannonBall], ProjectileLifetime[(int)ShotType.CannonBall]);
 
         newBall.SetActive(true);
         newBall.GetComponent<Rigidbody>().AddForce(ShotDir.transform.forward * ShotForce, ForceMode.Impulse);
@@ -144,11 +148,11 @@ public class CannonController : MonoBehaviour
     void GrapeShot(int shotAmount)
     {
         List<GameObject> totalShot = new();
-        float radius = BallRadius / (shotAmount * 1.5f);
+        float radius = ProjectileRadius[(int)ShotType.GrapeShot];
         for (int x = 0; x < shotAmount; x++)
         {
             Vector3 pos = new Vector3(ShotDir.transform.position.x, ShotDir.transform.position.y + Random.Range(-0.25f + radius, 0.25f - radius), ShotDir.transform.position.z + Random.Range(-0.25f + radius, 0.25f - radius));
-            GameObject newShot = CreateProjectile("Shot", pos, CannonBallMat, radius, CannonBallMass / shotAmount, CannonBallDrag / shotAmount);
+            GameObject newShot = CreateProjectile("Shot", pos, CannonBallMat, radius, PojectileMass[(int)ShotType.GrapeShot], ProjectileDrag[(int)ShotType.GrapeShot], ProjectileLifetime[(int)ShotType.GrapeShot]);
             totalShot.Add(newShot);
         }
 
@@ -161,7 +165,7 @@ public class CannonController : MonoBehaviour
     }
 
     // Creates a sphere with a given name, position, material, collider, radius nad rigidody with a specified mass and drag
-    GameObject CreateProjectile(string name, Vector3 pos, Material mat, float radius, float mass, float drag)
+    GameObject CreateProjectile(string name, Vector3 pos, Material mat, float radius, float mass, float drag,float lifeTime)
     {
         GameObject cannonBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
@@ -178,7 +182,7 @@ public class CannonController : MonoBehaviour
         rigidBody.drag = drag;
 
         cannonBall.AddComponent<ProjectileController>();
-        cannonBall.GetComponent<ProjectileController>().LifeTime = 3.0f;
+        cannonBall.GetComponent<ProjectileController>().LifeTime = lifeTime;
 
         return cannonBall;
     }

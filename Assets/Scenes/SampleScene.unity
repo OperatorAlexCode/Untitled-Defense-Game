@@ -630,11 +630,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16df501c573dad646816a1631fe66889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BallRadius: 0.5
-  RotationSpeed: 40
-  CannonBallMass: 1
-  CannonBallDrag: 0.5
+  BallRadius:
+  - 0.75
+  - 0.35
+  CannonBallMass:
+  - 1
+  - 0.3
+  CannonBallDrag:
+  - 0.6
+  - 0.3
   ShotForce: 40
+  RotationSpeed: 40
   RotationUpMax: 45
   RotationDownMin: -45
   RotationYMinMax: 75
