@@ -17,6 +17,8 @@ public class CannonController : MonoBehaviour
     public float[] ShotForces;
     public float[] MaxCooldowns;
     float[] Cooldowns;
+    public float[] Damage;
+    public float[] KnockBack;
 
     // float | Cannon
     public float RotationSpeed;
@@ -25,11 +27,6 @@ public class CannonController : MonoBehaviour
     public float RotationYMinMax;
     float CurrentAngle;
     float CurrentRotation;
-
-    // int
-    public int[] ReserveAmmo;
-    public int[] Damage;
-    public int[] KnockBack;
 
     // GameObject
     public GameObject Turret;
@@ -48,9 +45,9 @@ public class CannonController : MonoBehaviour
     Vector3 TurretStartRotation;
 
     // Other
+    public int[] ReserveAmmo;
     public Material CannonBallMat;
     ShotType CurrentShot;
-    
 
     // Start is called before the first frame update
     void Start()
