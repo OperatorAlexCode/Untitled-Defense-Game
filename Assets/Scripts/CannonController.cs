@@ -278,6 +278,7 @@ public class CannonController : MonoBehaviour
         Rigidbody rigidBody = cannonBall.GetComponent<Rigidbody>();
         rigidBody.mass = ProjectileMass[shotType];
         rigidBody.drag = ProjectileDrag[shotType];
+        rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         cannonBall.AddComponent<ProjectileController>();
         cannonBall.GetComponent<ProjectileController>().LifeTime = ProjectileLifetime[shotType];
