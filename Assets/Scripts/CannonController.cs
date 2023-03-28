@@ -234,7 +234,7 @@ public class CannonController : MonoBehaviour
         GameObject newBall = CreateProjectile("Cannon Ball", ShotDir.transform.position, CannonBallMat, (int)ShotType.CannonBall);
 
         newBall.SetActive(true);
-        newBall.GetComponent<Rigidbody>().AddForce(ShotDir.transform.forward * ShotForces[0], ForceMode.Impulse);
+        newBall.GetComponent<Rigidbody>().AddForce((ShotDir.transform.position - Barrel.transform.position).normalized * ShotForces[0], ForceMode.Impulse);
     }
 
     void GrapeShot(int shotAmount)

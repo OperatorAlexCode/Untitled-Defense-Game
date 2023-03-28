@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    // int
-    public int Damage;
-    public int knockBack;
-
-    // float
     public float LifeTime;
     float Age;
+    public float Damage;
+    public float knockBack;
 
     // Start is called before the first frame update
     void Start()
@@ -26,5 +23,4 @@ public class ProjectileController : MonoBehaviour
         if (Age > LifeTime)
             Destroy(gameObject);
     }
-    
 }
