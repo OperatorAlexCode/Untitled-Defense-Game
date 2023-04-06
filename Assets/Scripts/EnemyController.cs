@@ -42,6 +42,16 @@ public class EnemyController : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(knockbackVector, ForceMode.Impulse);
     }
 
+    //If the enemy collides with an object:
+    void onCollisionEnter(Collision collisionInfo)
+    {
+        //If it collides with a wall:
+        if (collisionInfo.collider.name == "Wall")
+        {
+            Debug.Log("Collision!");
+        }
+    }
+
     enum EnemyState
     {
         Moving,
