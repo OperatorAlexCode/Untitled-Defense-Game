@@ -10,7 +10,6 @@ public class ResourceNode : MonoBehaviour
     int MinerLevel;
     ResourceType Type;
     bool IsMined;
-
     
     // Start is called before the first frame update
     void Start()
