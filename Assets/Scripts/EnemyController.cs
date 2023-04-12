@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    // float
     public float Health;
     public float Damage;
     public float Speed;
     public float AttackCooldown;
 
+    // Other
     EnemyState CurrentState;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CurrentState = EnemyState.Moving;
     }
 
     // Update is called once per frame
@@ -50,6 +52,11 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Collision!");
         }
+    }
+
+    public bool IsDead()
+    {
+        return CurrentState == EnemyState.Dead;
     }
 
     enum EnemyState

@@ -267,6 +267,7 @@ public class CannonController : MonoBehaviour
         GameObject cannonBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
         cannonBall.name = name;
+        cannonBall.tag = "Shot";
         cannonBall.transform.position = pos;
         cannonBall.transform.localScale = new Vector3(ProjectileRadius[shotType], ProjectileRadius[shotType], ProjectileRadius[shotType]);
         cannonBall.GetComponent<MeshRenderer>().material = mat;

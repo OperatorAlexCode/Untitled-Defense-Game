@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     //Gives acess to rigidbody
-    public Rigidbody rb;
-    
+    Rigidbody rb;
+
     //Position variabels
     public float enemyX = 300;
     public float enemyY = 5;
@@ -16,11 +16,13 @@ public class EnemyMovement : MonoBehaviour
     public float forwardMovement = 1000;
     public float uppwardMovement = 0;
     public float sidewardMovement = 0;
+    public float MaxVel;
+    public float MaxSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -28,8 +30,8 @@ public class EnemyMovement : MonoBehaviour
     {
         //Sets the enemy position to a new vector
 
-        //Updates the players position with the values
-        rb.AddForce(-forwardMovement * Time.deltaTime, uppwardMovement, sidewardMovement);
+        if (!gameObject.GetComponent<EnemyController>().IsDead())
+            rb.AddTorque(-forwardMovement * Time.deltaTime, uppwardMovement, sidewardMovement);
 
     }
 }
