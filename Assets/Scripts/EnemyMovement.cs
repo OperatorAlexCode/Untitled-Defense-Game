@@ -26,12 +26,12 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //Sets the enemy position to a new vector
 
         if (!gameObject.GetComponent<EnemyController>().IsDead())
-            rb.AddTorque(-forwardMovement * Time.deltaTime, uppwardMovement, sidewardMovement);
+            rb.AddTorque(-forwardMovement * Time.deltaTime, uppwardMovement * Time.deltaTime, sidewardMovement * Time.deltaTime);
 
     }
 }
