@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceNode1 : Interactable
+public class Mine : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,5 @@ public class ResourceNode1 : Interactable
     void Update()
     {
         
-    }
-
-    protected override void Interact()
-    {
-        Debug.Log("Interacted with " + gameObject.name);
     }
 }
