@@ -28,6 +28,12 @@ public class CannonController : MonoBehaviour
     float CurrentAngle;
     float CurrentRotation;
 
+    // Int
+    public int UpgradeCostIncrement;
+    int[] DamageUpgradeLevel;
+    int[] KnockBackUpgradeLevel;
+    public int[] ReserveAmmo;
+
     // GameObject
     public GameObject Turret;
     public GameObject Barrel;
@@ -45,7 +51,6 @@ public class CannonController : MonoBehaviour
     Vector3 TurretStartRotation;
 
     // Other
-    public int[] ReserveAmmo;
     public Material CannonBallMat;
     ShotType CurrentShot;
 
@@ -63,6 +68,8 @@ public class CannonController : MonoBehaviour
         TurretStartRotation = Turret.transform.eulerAngles;
 
         Cooldowns = new float[MaxCooldowns.Length];
+        DamageUpgradeLevel = new int[] { 1, 1 };
+        KnockBackUpgradeLevel = new int[] { 1, 1 };
     }
 
     // Update is called once per frame
@@ -267,6 +274,7 @@ public class CannonController : MonoBehaviour
         GameObject cannonBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
         cannonBall.name = name;
+        cannonBall.tag = "Shot";
         cannonBall.transform.position = pos;
         cannonBall.transform.localScale = new Vector3(ProjectileRadius[shotType], ProjectileRadius[shotType], ProjectileRadius[shotType]);
         cannonBall.GetComponent<MeshRenderer>().material = mat;
@@ -277,10 +285,11 @@ public class CannonController : MonoBehaviour
         rigidBody.drag = ProjectileDrag[shotType];
         rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
+        // Adds damage and knockback to the projectile
         cannonBall.AddComponent<ProjectileController>();
         cannonBall.GetComponent<ProjectileController>().LifeTime = ProjectileLifetime[shotType];
-        cannonBall.GetComponent<ProjectileController>().Damage = Damage[shotType];
-        cannonBall.GetComponent<ProjectileController>().knockBack = KnockBack[shotType];
+        cannonBall.GetComponent<ProjectileController>().Damage = Damage[shotType] * (1 + (DamageUpgradeLevel[shotType] - 1 / 10));
+        cannonBall.GetComponent<ProjectileController>().knockBack = KnockBack[shotType] * (1 + (KnockBackUpgradeLevel[shotType] - 1 / 10));
 
         return cannonBall;
     }
@@ -288,6 +297,27 @@ public class CannonController : MonoBehaviour
     float GetRandomNumber(float range)
     {
         return Random.Range(-range, range);
+    }
+
+    public void UpgradeDamage(int shotToUpgrade)
+    {
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (gameManager.GunPowerAmount >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        {
+            DamageUpgradeLevel[shotToUpgrade] += 1;
+            gameManager.GunPowerAmount -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+        }
+
+    }
+
+    public void UpgradeknockBack(int shotToUpgrade)
+    {
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (gameManager.GunPowerAmount >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        {
+            KnockBackUpgradeLevel[shotToUpgrade] += 1;
+            gameManager.GunPowerAmount -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+        }  
     }
 }
 
