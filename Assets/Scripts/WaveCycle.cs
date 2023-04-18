@@ -15,7 +15,7 @@ public class WaveCycle : MonoBehaviour
         CameraOne();
         sun.GetComponent<Light>().enabled = true;
         Invoke("TurnSunOff", 3);
-        Invoke("TurnSunOn", 6);
+        Invoke("TurnSunOn", 30);
     }
 
     public void TurnSunOn()
@@ -28,6 +28,7 @@ public class WaveCycle : MonoBehaviour
     {
         sun.GetComponent<Light>().enabled = false;
         CameraTwo();
+        PlayerStats.Gold += 250;
     }
 
     public void CameraOne()

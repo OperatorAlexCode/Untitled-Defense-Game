@@ -10,16 +10,32 @@ public class BuildManager : MonoBehaviour
     }
 
     public GameObject standardMinePrefab;
+    public GameObject advancedMinePrefab;
+    public GameObject expertMinePrefab;
 
-    void Start ()
+    private MineBlueprint mineToBuild;
+
+    public bool CanBuild { get { return mineToBuild != null; } }
+    public bool HasGold { get { return PlayerStats.Gold >= mineToBuild.cost; } }
+
+    public void BuildMineOn(Node node)
     {
-        mineToBuild = standardMinePrefab;
+        if (PlayerStats.Gold < mineToBuild.cost)
+        {
+            Debug.Log("Not enough gold!");
+            return;
+        }
+
+        PlayerStats.Gold -= mineToBuild.cost;
+
+        GameObject mine = (GameObject)Instantiate(mineToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.mine = mine;
+
+        Debug.Log("Mine built! Gold left: " + PlayerStats.Gold);
     }
 
-    private GameObject mineToBuild;
-
-    public GameObject GetMineToBuild()
+    public void SelectMineToBuild(MineBlueprint mine)
     {
-        return mineToBuild;
+        mineToBuild = mine;
     }
 }
