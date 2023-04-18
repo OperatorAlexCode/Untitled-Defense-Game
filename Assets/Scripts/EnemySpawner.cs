@@ -20,6 +20,9 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject enemy;
 
+    //On of switch for enemy spawns
+    public bool startWave = true;
+
     public float currentTime;
     //If true decrease the value instead
     public bool countDown = true;
@@ -35,36 +38,39 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Countsdown activeWavetimer
-        activeWaveTimer = countDown ? activeWaveTimer -= Time.deltaTime : activeWaveTimer += Time.deltaTime;
-
-        //Changes the name of the timertext to the value of activeWaveTimer
-        timerText.text = new string("Next Wave in:") + activeWaveTimer.ToString("0");
-
-        //If the timer reches 0
-        if (activeWaveTimer <= 0)
+        if (startWave == true)
         {
-            ////Resets the timer
-            //activeWaveTimer = 100;
-        }
-        //If the activetimer is not 0 or lower
-        if (activeWaveTimer > 0)
-        {
-            //Countsdown the enemyspawntimer
-            enemySpawnTimer = countDown ? enemySpawnTimer -= Time.deltaTime : enemySpawnTimer += Time.deltaTime;
 
-            if (enemySpawnTimer < 0)
+            //Countsdown activeWavetimer
+            activeWaveTimer = countDown ? activeWaveTimer -= Time.deltaTime : activeWaveTimer += Time.deltaTime;
+
+            //Changes the name of the timertext to the value of activeWaveTimer
+            timerText.text = new string("Next Wave in:") + activeWaveTimer.ToString("0");
+
+            //If the timer reches 0
+            if (activeWaveTimer <= 0)
             {
-                {
-                    //Resets the timer
-                    enemySpawnTimer = 5;
+                ////Resets the timer
+                //activeWaveTimer = 100;
+            }
+            //If the activetimer is not 0 or lower
+            if (activeWaveTimer > 0)
+            {
+                //Countsdown the enemyspawntimer
+                enemySpawnTimer = countDown ? enemySpawnTimer -= Time.deltaTime : enemySpawnTimer += Time.deltaTime;
 
-                    //Calls the spawnEnemy function
-                    SpawnEnemy();
+                if (enemySpawnTimer < 0)
+                {
+                    {
+                        //Resets the timer
+                        enemySpawnTimer = 5;
+
+                        //Calls the spawnEnemy function
+                        SpawnEnemy();
+                    }
                 }
             }
         }
-
     }
 
     void SpawnEnemy()

@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeWaveTimer: 100
-  enemySpawnTimer: 10
+  enemySpawnTimer: 5
   timerText: {fileID: 1204913241}
   enemy: {fileID: 3007137055944080311, guid: 3d4e1669d8a445142ba08f0362528e0d, type: 3}
   currentTime: 0
