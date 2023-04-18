@@ -29,6 +29,7 @@ public class CannonController : MonoBehaviour
     float CurrentRotation;
 
     // Int
+    public int UpgradeCostIncrement;
     int[] DamageUpgradeLevel;
     int[] KnockBackUpgradeLevel;
     public int[] ReserveAmmo;
@@ -300,12 +301,23 @@ public class CannonController : MonoBehaviour
 
     public void UpgradeDamage(int shotToUpgrade)
     {
-        DamageUpgradeLevel[shotToUpgrade] += 1;
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (gameManager.GunPowerAmount >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        {
+            DamageUpgradeLevel[shotToUpgrade] += 1;
+            gameManager.GunPowerAmount -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+        }
+
     }
 
     public void UpgradeknockBack(int shotToUpgrade)
     {
-        KnockBackUpgradeLevel[shotToUpgrade] += 1;
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (gameManager.GunPowerAmount >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        {
+            KnockBackUpgradeLevel[shotToUpgrade] += 1;
+            gameManager.GunPowerAmount -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+        }  
     }
 }
 

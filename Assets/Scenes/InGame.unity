@@ -1086,7 +1086,7 @@ MonoBehaviour:
   enemyZ: 0
   forwardMovement: 0
   uppwardMovement: 0
-  sidewardMovement: 1000
+  sidewardMovement: 750
   MaxVel: 0
   MaxSpeed: 0
 --- !u!54 &1572639128
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   enemyZ: 0
   forwardMovement: 0
   uppwardMovement: 0
-  sidewardMovement: 1000
+  sidewardMovement: 750
   MaxVel: 0
   MaxSpeed: 0
 --- !u!54 &1659002243
@@ -1264,7 +1264,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659002240}
-  m_Material: {fileID: 13400000, guid: 55687bc6c4fddcb4ab3dc8ad7ac25f83, type: 2}
+  m_Material: {fileID: 13400000, guid: 9a9304eb6ce60384ebd7af818046fa5b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   enemyZ: 0
   forwardMovement: 0
   uppwardMovement: 0
-  sidewardMovement: 1000
+  sidewardMovement: 750
   MaxVel: 0
   MaxSpeed: 0
 --- !u!54 &1710972716
@@ -1416,7 +1416,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710972713}
-  m_Material: {fileID: 13400000, guid: 55687bc6c4fddcb4ab3dc8ad7ac25f83, type: 2}
+  m_Material: {fileID: 13400000, guid: 9a9304eb6ce60384ebd7af818046fa5b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2732,7 +2732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8273474433782823794}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 1, y: 23.81, z: 0}
+  m_LocalPosition: {x: 1.2, y: 24.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2754,7 +2754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileRadius:
-  - 1
+  - 0.8
   - 0.4
   ProjectileMass:
   - 1
@@ -2779,9 +2779,10 @@ MonoBehaviour:
   - 1
   RotationSpeed: 40
   RotationUpMax: 45
-  RotationDownMin: 48
+  RotationDownMin: 50
   RotationYMinMax: 80
   ReserveAmmo: 6400000032000000
+  UpgradeCostIncrement: 100
   Turret: {fileID: 8296972951885784165}
   Barrel: {fileID: 6462044504115680095}
   ShotDir: {fileID: 203736650}
