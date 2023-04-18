@@ -320,6 +320,11 @@ public class CannonController : MonoBehaviour
             gameManager.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
         }  
     }
+
+    public void ActivateDeactivate(bool value)
+    {
+        Active = value;
+    }
 }
 
 public enum ShotType

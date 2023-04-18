@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ResourceNode : MonoBehaviour
 {
+    // int
     public int ResourceAmount;
-    public int MinerHealth;
-    public int MinerMaxHealth;
     int MinerLevel;
+
+    //float
+    public float MinerHealth;
+    public float MinerMaxHealth;
+
+    // other
     ResourceType Type;
     bool IsMined;
     
@@ -31,15 +36,29 @@ public class ResourceNode : MonoBehaviour
     {
         IsMined = true;
         MinerLevel = 1;
+        MinerHealth = 10;
     }
 
     public void UpgradeMiner()
     {
-
+        MinerLevel++;
+        MinerHealth = MinerLevel * 10;
     }
 
     public void GetResource()
     {
         GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[Type] += ResourceAmount*MinerLevel;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy" && IsMined)
+        {
+            MinerHealth -= collision.gameObject.GetComponent<EnemyController>().Damage;
+            if (MinerHealth <= 0)
+                IsMined = false;
+
+            Destroy(collision.gameObject);
+        }
     }
 }
