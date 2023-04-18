@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemy;
 
     //On of switch for enemy spawns
-    public bool startWave = true;
+    public bool SpawnEnemies = true;
 
     public float currentTime;
     //If true decrease the value instead
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startWave == true)
+        if (SpawnEnemies == true)
         {
 
             //Countsdown activeWavetimer
@@ -71,6 +71,11 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StartStopWave(bool value)
+    {
+        SpawnEnemies= value;
     }
 
     void SpawnEnemy()

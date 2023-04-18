@@ -23,12 +23,14 @@ public class ResourceNode : MonoBehaviour
         if (MinerHealth < 0 && IsMined == true)
         {
             IsMined = false;
+            MinerLevel = 0;
         }
     }
 
     public void BuildMiner()
     {
         IsMined = true;
+        MinerLevel = 1;
     }
 
     public void UpgradeMiner()
@@ -38,12 +40,6 @@ public class ResourceNode : MonoBehaviour
 
     public void GetResource()
     {
-
-    }
-
-    enum ResourceType
-    {
-        Gold,
-        Gunpowder
+        GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[Type] += ResourceAmount*MinerLevel;
     }
 }

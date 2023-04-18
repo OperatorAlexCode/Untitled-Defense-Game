@@ -53,6 +53,7 @@ public class CannonController : MonoBehaviour
     // Other
     public Material CannonBallMat;
     ShotType CurrentShot;
+    bool Active;
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +76,7 @@ public class CannonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.anyKey && Active)
             if (AreAnyKeysPressed(Controls.ToArray(), true))
             {
                 #region Shoot cannon with current shot type
@@ -302,10 +303,10 @@ public class CannonController : MonoBehaviour
     public void UpgradeDamage(int shotToUpgrade)
     {
         GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (gameManager.GunPowerAmount >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        if (gameManager.Resources[ResourceType.gunpowder] >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
             DamageUpgradeLevel[shotToUpgrade] += 1;
-            gameManager.GunPowerAmount -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            gameManager.Resources[ResourceType.gunpowder] -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
         }
 
     }
@@ -313,10 +314,10 @@ public class CannonController : MonoBehaviour
     public void UpgradeknockBack(int shotToUpgrade)
     {
         GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (gameManager.GunPowerAmount >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        if (gameManager.Resources[ResourceType.gunpowder] >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
             KnockBackUpgradeLevel[shotToUpgrade] += 1;
-            gameManager.GunPowerAmount -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            gameManager.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
         }  
     }
 }
