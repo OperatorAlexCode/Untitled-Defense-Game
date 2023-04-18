@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     public float enemyZ = 0;
 
     //Movement variabels
-    public float forwardMovement = 1000;
+    public float forwardMovement = 500;
     public float uppwardMovement = 0;
     public float sidewardMovement = 0;
     public float MaxVel;

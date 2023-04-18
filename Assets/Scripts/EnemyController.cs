@@ -9,6 +9,9 @@ public class EnemyController : MonoBehaviour
     public float Damage;
     public float Speed;
     public float AttackCooldown;
+    public float despawnTimer = 10;
+    //If true decrease the value instead
+    public bool countDown = true;
 
     // Other
     EnemyState CurrentState;
@@ -27,6 +30,18 @@ public class EnemyController : MonoBehaviour
         {
 
         }
+
+        //Trickles down despawntimer if the enemies are dead
+        if (CurrentState == EnemyState.Dead)
+        {
+            despawnTimer = countDown ? despawnTimer -= Time.deltaTime : despawnTimer += Time.deltaTime;
+            if (despawnTimer < 0)
+            {
+                //Despawn Enemy
+                Destroy(gameObject);
+            }
+        }
+       
     }
 
     public void Hurt(float damage, float knockback, Vector3 projectilePos)

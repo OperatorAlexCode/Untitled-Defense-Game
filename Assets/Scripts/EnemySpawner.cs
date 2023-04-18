@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartStopWave(bool value)
     {
-        SpawnEnemies= value;
+        SpawnEnemies = value;
     }
 
     void SpawnEnemy()
