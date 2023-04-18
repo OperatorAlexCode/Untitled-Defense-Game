@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
         //If it collides with a wall:
         if (collisionInfo.collider.name == "Wall")
         {
-            Debug.Log("Collision!");
+            CurrentState = EnemyState.Dead;
         }
     }
 
