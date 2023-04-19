@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8858340222641186875}
   - component: {fileID: 491157048892447168}
   - component: {fileID: 6336242414661756113}
-  - component: {fileID: 4717803561495574369}
   m_Layer: 0
   m_Name: StandardMine
   m_TagString: Untagged
@@ -98,17 +97,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4717803561495574369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3431455880114017317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f728d4c0a90f33247bcffee67e8655d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  slider: {fileID: 645811985935845766, guid: 3eb161498ffa7ca4b9053e38e9fe9d5c, type: 3}

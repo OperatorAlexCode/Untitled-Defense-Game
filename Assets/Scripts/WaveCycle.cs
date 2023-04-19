@@ -12,10 +12,7 @@ public class WaveCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CameraOne();
-        sun.GetComponent<Light>().enabled = true;
-        Invoke("TurnSunOff", 3);
-        Invoke("TurnSunOn", 30);
+        TurnSunOff();
     }
 
     public void TurnSunOn()
@@ -28,7 +25,6 @@ public class WaveCycle : MonoBehaviour
     {
         sun.GetComponent<Light>().enabled = false;
         CameraTwo();
-        PlayerStats.Gold += 250;
     }
 
     public void CameraOne()

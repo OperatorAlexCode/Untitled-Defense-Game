@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     public bool countDown = true;
 
     // Other
-    EnemyState CurrentState;
+    public EnemyState CurrentState;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour
         return CurrentState == EnemyState.Dead;
     }
 
-    enum EnemyState
+    public enum EnemyState
     {
         Moving,
         Attacking,

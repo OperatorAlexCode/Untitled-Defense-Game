@@ -13,8 +13,8 @@ public class ResourceNode : MonoBehaviour
     public float MinerMaxHealth;
 
     // other
-    ResourceType Type;
-    bool IsMined;
+    public ResourceType Type;
+    public bool IsMined;
     
     // Start is called before the first frame update
     void Start()
@@ -36,18 +36,21 @@ public class ResourceNode : MonoBehaviour
     {
         IsMined = true;
         MinerLevel = 1;
-        MinerHealth = 10;
+        MinerMaxHealth = 10;
+        MinerHealth = MinerMaxHealth;
     }
 
     public void UpgradeMiner()
     {
         MinerLevel++;
-        MinerHealth = MinerLevel * 10;
+        MinerMaxHealth = MinerLevel * 10;
+        MinerHealth = MinerMaxHealth;
     }
 
     public void GetResource()
     {
-        GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[Type] += ResourceAmount*MinerLevel;
+        if (IsMined)
+            GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[Type] += ResourceAmount*MinerLevel;
     }
 
     private void OnCollisionEnter(Collision collision)
