@@ -12,13 +12,21 @@ public class WaveCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TurnSunOff();
+    }
+
+    public void hide()
+    {
+    }
+
+    public void show()
+    {
     }
 
     public void TurnSunOn()
     {
         sun.GetComponent<Light>().enabled = true;
         CameraOne();
+        hide();
     }
 
     public void TurnSunOff()

@@ -8,6 +8,8 @@ public class Shop : MonoBehaviour
 
     BuildManager buildManager;
 
+    //public bool showButtons = true;
+
     void Start()
     {
         buildManager = BuildManager.instance;

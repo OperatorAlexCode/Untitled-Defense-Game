@@ -1555,6 +1555,7 @@ MonoBehaviour:
   sun: {fileID: 705507994}
   Camera1: {fileID: 963194225}
   Camera2: {fileID: 1905903837}
+  shop: {fileID: 891842229}
 --- !u!1 &706888965
 GameObject:
   m_ObjectHideFlags: 0
