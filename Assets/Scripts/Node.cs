@@ -22,7 +22,7 @@ public class Node : MonoBehaviour
         startColor = rend.material.color;
 
         RN = gameObject.GetComponent<ResourceNode>();
-        Miner = gameObject.transform.Find("StandardMine").gameObject;
+        Miner = gameObject.transform.Find("Miner").gameObject;
     }
 
     private void Update()

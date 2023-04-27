@@ -33,6 +33,7 @@ public class CannonController : MonoBehaviour
     int[] DamageUpgradeLevel;
     int[] KnockBackUpgradeLevel;
     public int[] ReserveAmmo;
+    public int[] MaxReserveAmmo;
 
     // GameObject
     public GameObject Turret;
@@ -305,8 +306,8 @@ public class CannonController : MonoBehaviour
         GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         if (gameManager.Resources[ResourceType.gunpowder] >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
-            DamageUpgradeLevel[shotToUpgrade] += 1;
             gameManager.Resources[ResourceType.gunpowder] -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            DamageUpgradeLevel[shotToUpgrade] += 1;
         }
 
     }
@@ -316,8 +317,8 @@ public class CannonController : MonoBehaviour
         GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         if (gameManager.Resources[ResourceType.gunpowder] >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
-            KnockBackUpgradeLevel[shotToUpgrade] += 1;
             gameManager.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            KnockBackUpgradeLevel[shotToUpgrade] += 1;
         }  
     }
 

@@ -19,10 +19,11 @@ public class WallController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
-        {
-            GameObject enemy = collision.gameObject;
-            GameObject.Find("Game Manager").GetComponent<GameManager>().LoseHealth(enemy.GetComponent<EnemyController>().Damage);
-            Destroy(collision.gameObject);
-        }
+            if (collision.gameObject.GetComponent<EnemyController>().CurrentState != EnemyController.EnemyState.Dead)
+            {
+                GameObject enemy = collision.gameObject;
+                GameObject.Find("Game Manager").GetComponent<GameManager>().LoseHealth(enemy.GetComponent<EnemyController>().Damage);
+                Destroy(collision.gameObject);
+            }
     }
 }

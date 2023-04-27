@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
         Resources[ResourceType.gold] = 200;
 
-        GameObject.Find("Sun").gameObject.GetComponent<WaveCycle>().TurnSunOff();
+        GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         CurrentWave++;
         GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().ActivateDeactivate(true);
         GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(true);
-        GameObject.Find("Sun").gameObject.GetComponent<WaveCycle>().TurnSunOn();
+        GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOn();
         InWave = true;
         BuildUI.SetActive(false);
     }
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().ActivateDeactivate(false);
         GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(false);
-        GameObject.Find("Sun").gameObject.GetComponent<WaveCycle>().TurnSunOff();
+        GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
         InWave = false;
 
         BuildUI.SetActive(true);

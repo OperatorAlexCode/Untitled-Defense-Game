@@ -11,15 +11,16 @@ public class ResourceNode : MonoBehaviour
     //float
     public float MinerHealth;
     public float MinerMaxHealth;
+    float HealthIncrement = 20;
 
     // other
     public ResourceType Type;
     public bool IsMined;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -36,32 +37,33 @@ public class ResourceNode : MonoBehaviour
     {
         IsMined = true;
         MinerLevel = 1;
-        MinerMaxHealth = 10;
+        MinerMaxHealth = HealthIncrement;
         MinerHealth = MinerMaxHealth;
     }
 
     public void UpgradeMiner()
     {
         MinerLevel++;
-        MinerMaxHealth = MinerLevel * 10;
+        MinerMaxHealth = MinerLevel * HealthIncrement;
         MinerHealth = MinerMaxHealth;
     }
 
     public void GetResource()
     {
         if (IsMined)
-            GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[Type] += ResourceAmount*MinerLevel;
+            GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[Type] += ResourceAmount * MinerLevel;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void MinerCollisionCheck(Collision collision)
     {
-        if(collision.gameObject.tag == "Enemy" && IsMined)
-        {
-            MinerHealth -= collision.gameObject.GetComponent<EnemyController>().Damage;
-            if (MinerHealth <= 0)
-                IsMined = false;
+        if (collision.gameObject.tag == "Enemy" && IsMined)
+            if (collision.gameObject.GetComponent<EnemyController>().CurrentState != EnemyController.EnemyState.Dead)
+            {
+                MinerHealth -= collision.gameObject.GetComponent<EnemyController>().Damage;
+                if (MinerHealth <= 0)
+                    IsMined = false;
 
-            Destroy(collision.gameObject);
-        }
+                Destroy(collision.gameObject);
+            }
     }
 }
