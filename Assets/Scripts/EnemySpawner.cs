@@ -18,7 +18,9 @@ public class EnemySpawner : MonoBehaviour
 
     public TextMeshProUGUI timerText;
 
+    //Enemies tha can be summoned
     public GameObject enemy;
+    public GameObject giant;
 
     //On of switch for enemy spawns
     public bool SpawnEnemies = false;
@@ -26,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
     public float currentTime;
 
     public GameManager GM;
-    //float temp = new Random().Next(0, 10);
 
     // Start is called before the first frame update
     void Start()
@@ -84,18 +85,27 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Transform enemytransform = enemy.transform;
-        enemytransform.position = new Vector3(300, 2, Random.Range(-50, 50));
+        float enemySpawnNumber = Random.Range(0, 100);
 
-        Instantiate(enemy, enemytransform);
+        if (enemySpawnNumber < 80 && enemySpawnNumber > 20)
+        {
+            Transform enemytransform = enemy.transform;
+            enemytransform.position = new Vector3(300, 2, Random.Range(-50, 50));
+            Instantiate(enemy, enemytransform);
+        }
+        else if (enemySpawnNumber < 21)
+        {
+            Transform enemytransform = enemy.transform;
+            enemytransform.position = new Vector3(300, 30, Random.Range(-50, 50));
+            Instantiate(enemy, enemytransform);
+        }
+
+        else if (enemySpawnNumber > 79)
+        {
+            Transform gianttransform = giant.transform;
+            gianttransform.position = new Vector3(300, 5, Random.Range(-50, 50));
+            Instantiate(giant, gianttransform);
+        }
     }
 
-    //void GameObject CreateEnemy()
-    //{
-    //    GameObject enemy = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-    //    enemy.name = name;
-    //    enemy.transform.position = position;
-
-    //}
 }

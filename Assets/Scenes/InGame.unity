@@ -1243,6 +1243,7 @@ MonoBehaviour:
   enemySpawnTimer: 5
   timerText: {fileID: 0}
   enemy: {fileID: 4723756821563124043, guid: 3d4e1669d8a445142ba08f0362528e0d, type: 3}
+  giant: {fileID: 4581461161189949145, guid: 2b3ab1599a688d348b00349b32a98cc0, type: 3}
   SpawnEnemies: 0
   currentTime: 0
   GM: {fileID: 234100719}
