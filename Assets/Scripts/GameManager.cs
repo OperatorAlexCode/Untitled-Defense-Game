@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public EnemySpawner SpawnManager;
     public List<ResourceNode> Nodes;
     public int PassiveGoldIncome;
+    public Material[] PlayerMats;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
         Resources[ResourceType.gold] = 200;
 
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
+
+        PlayerSettings settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
+
+        foreach (Material mat in PlayerMats)
+            mat.color = settings.PlayerColor;
     }
 
     // Update is called once per frame

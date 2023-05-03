@@ -64,6 +64,17 @@ public class CannonController : MonoBehaviour
     {
         CurrentShot = ShotType.CannonBall;
 
+        // Sets controls and settings from PlayerSettings
+        PlayerSettings settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
+
+        MovementKeys = settings.MovementKeys;
+        ShotTypeHotKeys = settings.ShotTypeHotKeys;
+        ShotTypeSelectKeys = settings.ShotTypesSelectKeys;
+        FireKey = settings.FireKey;
+        SlowDownKey = settings.SlowDownKey;
+        SlowDownFactor = settings.SlowDownStrength;
+        RotationSpeed = settings.RotationSpeed;
+
         Controls = new List<KeyCode>() { FireKey, SlowDownKey };
         Controls.AddRange(MovementKeys);
         Controls.AddRange(ShotTypeHotKeys);
