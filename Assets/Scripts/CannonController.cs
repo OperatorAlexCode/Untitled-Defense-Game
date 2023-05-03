@@ -27,6 +27,7 @@ public class CannonController : MonoBehaviour
     public float RotationYMinMax;
     float CurrentAngle;
     float CurrentRotation;
+    public float SlowDownFactor;
 
     // Int
     public int UpgradeCostIncrement;
@@ -34,6 +35,7 @@ public class CannonController : MonoBehaviour
     int[] KnockBackUpgradeLevel;
     public int[] ReserveAmmo;
     public int[] MaxReserveAmmo;
+    public int[] RestockPrice;
 
     // GameObject
     public GameObject Turret;
@@ -45,6 +47,7 @@ public class CannonController : MonoBehaviour
     public KeyCode[] ShotTypeHotKeys;
     public KeyCode[] ShotTypeSelectKeys;
     public KeyCode FireKey;
+    public KeyCode SlowDownKey;
     List<KeyCode> Controls;
 
     // Vector3
@@ -61,7 +64,7 @@ public class CannonController : MonoBehaviour
     {
         CurrentShot = ShotType.CannonBall;
 
-        Controls = new List<KeyCode>() { FireKey };
+        Controls = new List<KeyCode>() { FireKey, SlowDownKey };
         Controls.AddRange(MovementKeys);
         Controls.AddRange(ShotTypeHotKeys);
         Controls.AddRange(ShotTypeSelectKeys);
@@ -70,8 +73,9 @@ public class CannonController : MonoBehaviour
         TurretStartRotation = Turret.transform.eulerAngles;
 
         Cooldowns = new float[MaxCooldowns.Length];
-        DamageUpgradeLevel = new int[] { 1, 1 };
-        KnockBackUpgradeLevel = new int[] { 1, 1 };
+        DamageUpgradeLevel = new int[] { 1, 1, 1 };
+        KnockBackUpgradeLevel = new int[] { 1, 1, 1 };
+        ReserveAmmo = MaxReserveAmmo;
     }
 
     // Update is called once per frame
@@ -95,9 +99,15 @@ public class CannonController : MonoBehaviour
                             case ShotType.GrapeShot:
                                 GrapeShot(5);
                                 break;
+                            case ShotType.RailGun:
+                                RailGun();
+                                break;
                         }
 
                         ReserveAmmo[index] -= 1;
+                        if (CurrentShot == ShotType.CannonBall)
+                            ReserveAmmo[index] += 1;
+
                         Cooldowns[index] = MaxCooldowns[index];
                     }
                 }
@@ -105,6 +115,10 @@ public class CannonController : MonoBehaviour
 
                 #region Moving Turret
                 float rotationamount = RotationSpeed * Time.deltaTime;
+
+                if (IsKeyPressed(SlowDownKey, true))
+                    rotationamount *= SlowDownFactor;
+
                 Vector3 barrelRotation = Barrel.transform.localEulerAngles;
                 Vector3 turretRotation = Turret.transform.localEulerAngles;
 
@@ -237,10 +251,10 @@ public class CannonController : MonoBehaviour
 
     void CannonBall()
     {
-        GameObject newBall = CreateProjectile("Cannon Ball", ShotDir.transform.position, CannonBallMat, (int)ShotType.CannonBall);
+        GameObject newBall = CreateProjectile("Cannon Ball", ShotDir.transform.position, (int)ShotType.CannonBall);
 
         newBall.SetActive(true);
-        newBall.GetComponent<Rigidbody>().AddForce((ShotDir.transform.position - Barrel.transform.position).normalized * ShotForces[0], ForceMode.Impulse);
+        newBall.GetComponent<Rigidbody>().AddForce((ShotDir.transform.position - Barrel.transform.position).normalized * ShotForces[(int)ShotType.CannonBall], ForceMode.Impulse);
     }
 
     void GrapeShot(int shotAmount)
@@ -252,15 +266,23 @@ public class CannonController : MonoBehaviour
         for (int x = 0; x < shotAmount; x++)
         {
             Vector3 pos = new Vector3(ShotDir.transform.position.x, ShotDir.transform.position.y + GetRandomNumber(bounds + radius), ShotDir.transform.position.z + GetRandomNumber(bounds + radius));
-            GameObject newShot = CreateProjectile("Shot", pos, CannonBallMat, (int)ShotType.GrapeShot);
+            GameObject newShot = CreateProjectile("Shot", pos, (int)ShotType.GrapeShot);
             totalShot.Add(newShot);
         }
 
         foreach (GameObject shot in totalShot)
         {
             shot.SetActive(true);
-            shot.GetComponent<Rigidbody>().AddForce((ShotDir.transform.position - Barrel.transform.position).normalized * (ShotForces[1] * 0.75f), ForceMode.Impulse);
+            shot.GetComponent<Rigidbody>().AddForce((ShotDir.transform.position - Barrel.transform.position).normalized * (ShotForces[(int)ShotType.GrapeShot] * 0.75f), ForceMode.Impulse);
         }
+    }
+
+    void RailGun()
+    {
+        GameObject newBall = CreateProjectile("Rail Gun Sabbot", ShotDir.transform.position, (int)ShotType.RailGun);
+
+        newBall.SetActive(true);
+        newBall.GetComponent<Rigidbody>().AddForce((ShotDir.transform.position - Barrel.transform.position).normalized * ShotForces[(int)ShotType.RailGun], ForceMode.Impulse);
     }
 
     /// <summary>
@@ -271,7 +293,7 @@ public class CannonController : MonoBehaviour
     /// <param name="mat">Material applied to gameobject</param>
     /// <param name="shotType">Index for the type of shot to be created</param>
     /// <returns></returns>
-    GameObject CreateProjectile(string name, Vector3 pos, Material mat, int shotType)
+    GameObject CreateProjectile(string name, Vector3 pos, int shotType)
     {
         GameObject cannonBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
@@ -279,7 +301,7 @@ public class CannonController : MonoBehaviour
         cannonBall.tag = "Shot";
         cannonBall.transform.position = pos;
         cannonBall.transform.localScale = new Vector3(ProjectileRadius[shotType], ProjectileRadius[shotType], ProjectileRadius[shotType]);
-        cannonBall.GetComponent<MeshRenderer>().material = mat;
+        cannonBall.GetComponent<MeshRenderer>().material = CannonBallMat;
 
         cannonBall.AddComponent<Rigidbody>();
         Rigidbody rigidBody = cannonBall.GetComponent<Rigidbody>();
@@ -290,8 +312,8 @@ public class CannonController : MonoBehaviour
         // Adds damage and knockback to the projectile
         cannonBall.AddComponent<ProjectileController>();
         cannonBall.GetComponent<ProjectileController>().LifeTime = ProjectileLifetime[shotType];
-        cannonBall.GetComponent<ProjectileController>().Damage = Damage[shotType] * (1 + (DamageUpgradeLevel[shotType] - 1 / 10));
-        cannonBall.GetComponent<ProjectileController>().knockBack = KnockBack[shotType] * (1 + (KnockBackUpgradeLevel[shotType] - 1 / 10));
+        cannonBall.GetComponent<ProjectileController>().Damage = Damage[shotType] * (1 + (DamageUpgradeLevel[shotType] - 1 * 0.5f));
+        cannonBall.GetComponent<ProjectileController>().knockBack = KnockBack[shotType] * (1 + (KnockBackUpgradeLevel[shotType] - 1 * 0.5f));
 
         return cannonBall;
     }
@@ -326,10 +348,16 @@ public class CannonController : MonoBehaviour
     {
         Active = value;
     }
+
+    public void RestockAmmo(int shotToRestock)
+    {
+        ReserveAmmo[shotToRestock] = MaxReserveAmmo[shotToRestock];
+    }
 }
 
 public enum ShotType
 {
     CannonBall,
-    GrapeShot
+    GrapeShot,
+    RailGun
 }

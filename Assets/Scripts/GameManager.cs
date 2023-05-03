@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public float PlayerHealth;
     public bool InWave;
     public EnemySpawner SpawnManager;
-    public GameObject BuildUI;
     public List<ResourceNode> Nodes;
     public int PassiveGoldIncome;
 
@@ -35,10 +34,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (PlayerHealth <= 0)
-        {
-            EditorApplication.isPlaying = false;
-            Application.Quit();
-        }
+            SceneController.LoadGameOverScene();
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -52,8 +48,8 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().ActivateDeactivate(true);
         GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(true);
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOn();
+        GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ActivateCannonHud();
         InWave = true;
-        BuildUI.SetActive(false);
     }
 
     public void StopWave()
@@ -61,9 +57,8 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().ActivateDeactivate(false);
         GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(false);
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
+        GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ActivateBuildUI();
         InWave = false;
-
-        BuildUI.SetActive(true);
 
         foreach (ResourceNode rn in Nodes)
             rn.GetResource();
