@@ -7,9 +7,9 @@ public class EnemyController : MonoBehaviour
     // float
     public float Health;
     public float Damage;
-    public float Speed;
     public float AttackCooldown;
     public float despawnTimer = 10;
+    public float knockbackResistance;
     //If true decrease the value instead
     public bool countDown = true;
 
@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
     {
         Health -= damage;
 
-        Vector3 knockbackVector = (transform.position - projectilePos).normalized * knockback;
+        Vector3 knockbackVector = (transform.position - projectilePos).normalized * knockback / knockbackResistance;
 
         if (Health <= 0)
         {

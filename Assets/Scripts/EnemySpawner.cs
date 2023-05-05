@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     //Enemies tha can be summoned
     public GameObject enemy;
     public GameObject giant;
+    public GameObject fastEnemy;
 
     //On of switch for enemy spawns
     public bool SpawnEnemies = false;
@@ -95,9 +96,9 @@ public class EnemySpawner : MonoBehaviour
         }
         else if (enemySpawnNumber < 21)
         {
-            Transform enemytransform = enemy.transform;
-            enemytransform.position = new Vector3(300, 30, Random.Range(-50, 50));
-            Instantiate(enemy, enemytransform);
+            Transform fastEnemytransform = fastEnemy.transform;
+            fastEnemytransform.position = new Vector3(300, 5, Random.Range(-50, 50));
+            Instantiate(fastEnemy, fastEnemytransform);
         }
 
         else if (enemySpawnNumber > 79)
