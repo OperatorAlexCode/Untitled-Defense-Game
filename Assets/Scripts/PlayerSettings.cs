@@ -7,6 +7,7 @@ public class PlayerSettings : MonoBehaviour
 {
     public float RotationSpeed = 40;
     public float SlowDownStrength = 0.5f;
+    public float MusicVolume = 0.75f;
 
     public Color PlayerColor;
 

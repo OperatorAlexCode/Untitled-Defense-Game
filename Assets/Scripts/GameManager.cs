@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(true);
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOn();
         GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ActivateCannonHud();
+        GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayDayTheme();
         InWave = true;
     }
 
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
             rn.GetResource();
 
         Resources[ResourceType.gold] += PassiveGoldIncome;
+        GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayNightTheme();
     }
 
     public void LoseHealth(float damage)

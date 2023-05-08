@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 30
-  Damage: 0
+  Damage: 10
   Speed: 0
   AttackCooldown: 0
   despawnTimer: 10
