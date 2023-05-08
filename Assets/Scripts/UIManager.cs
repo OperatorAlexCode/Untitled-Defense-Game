@@ -6,13 +6,20 @@ using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
+    // TextMeshPro
     public TextMeshProUGUI GoldText;
     public TextMeshProUGUI GunPowerText;
     public TextMeshProUGUI WaveText;
     public TextMeshProUGUI HealthText;
-    public GameManager GM;
+    
+    // GameObject
     public GameObject BuildUI;
     public GameObject CannonHUD;
+    public GameObject[] UpgradeButtons;
+    public GameObject[] AquireButtons;
+
+    // Other
+    public GameManager GM;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +45,11 @@ public class UIManager : MonoBehaviour
     {
         BuildUI.SetActive(false);
         CannonHUD.SetActive(true);
+    }
+
+    public void ShowUpgrades(int shotType)
+    {
+        AquireButtons[shotType].SetActive(false);
+        UpgradeButtons[shotType].SetActive(true);
     }
 }

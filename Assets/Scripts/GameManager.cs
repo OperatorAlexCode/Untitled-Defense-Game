@@ -52,17 +52,18 @@ public class GameManager : MonoBehaviour
     {
         CurrentWave++;
         GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().ActivateDeactivate(true);
-        GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(true);
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOn();
         GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ActivateCannonHud();
         GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayDayTheme();
+        SpawnManager.StartStopWave(true);
         InWave = true;
     }
 
     public void StopWave()
     {
+        SpawnManager.StartStopWave(false);
         GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().ActivateDeactivate(false);
-        GameObject.Find("SpawnManager").gameObject.GetComponent<EnemySpawner>().StartStopWave(false);
+        GameObject.Find("Cannon").gameObject.GetComponent<CannonController>().RestockAmmo((int)ShotType.CannonBall);
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
         GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ActivateBuildUI();
         InWave = false;
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
 
         Resources[ResourceType.gold] += PassiveGoldIncome;
         GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayNightTheme();
+        
     }
 
     public void LoseHealth(float damage)

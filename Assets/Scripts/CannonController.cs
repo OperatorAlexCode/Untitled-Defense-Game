@@ -36,6 +36,7 @@ public class CannonController : MonoBehaviour
     public int[] ReserveAmmo;
     public int[] MaxReserveAmmo;
     public int[] RestockPrice;
+    public int[] AcquisitionCost;
 
     // GameObject
     public GameObject Turret;
@@ -54,9 +55,12 @@ public class CannonController : MonoBehaviour
     Vector3 BarrelStartRotation;
     Vector3 TurretStartRotation;
 
+    // ShotType
+    ShotType CurrentShot;
+    List<ShotType> AquiredShot;
+
     // Other
     public Material CannonBallMat;
-    ShotType CurrentShot;
     bool Active;
 
     // Start is called before the first frame update
@@ -87,6 +91,7 @@ public class CannonController : MonoBehaviour
         DamageUpgradeLevel = new int[] { 1, 1, 1 };
         KnockBackUpgradeLevel = new int[] { 1, 1, 1 };
         ReserveAmmo = MaxReserveAmmo;
+        AquiredShot = new() { ShotType.CannonBall };
     }
 
     // Update is called once per frame
@@ -363,6 +368,17 @@ public class CannonController : MonoBehaviour
     public void RestockAmmo(int shotToRestock)
     {
         ReserveAmmo[shotToRestock] = MaxReserveAmmo[shotToRestock];
+    }
+
+    public void AquireShotType(int shotToAquire)
+    {
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (!AquiredShot.Contains((ShotType)shotToAquire) && gameManager.Resources[ResourceType.gunpowder] >= AcquisitionCost[shotToAquire])
+        {
+            gameManager.Resources[ResourceType.gunpowder] -= AcquisitionCost[shotToAquire];
+            AquiredShot.Add((ShotType)shotToAquire);
+            GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowUpgrades(shotToAquire);
+        }
     }
 }
 
