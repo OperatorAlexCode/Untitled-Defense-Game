@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Threading;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -7,17 +9,12 @@ public class EnemyMovement : MonoBehaviour
     //Gives acess to rigidbody
     Rigidbody rb;
 
-    //Position variabels
-    public float enemyX = 300;
-    public float enemyY = 5;
-    public float enemyZ = 0;
-
-    //Movement variabels
-    public float forwardMovement = 500;
-    public float uppwardMovement = 0;
-    public float sidewardMovement = 0;
-    public float MaxVel;
-    public float MaxSpeed;
+    //Enemy vector used for movement
+    public Vector3 movementVector;
+    //Float variabels
+    public float MaxVelocity;
+    public float enemySpeed;
+    public float MaxRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +25,21 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Sets the enemy position to a new vector
-
+        //Moves the enemy if their not dead
         if (!gameObject.GetComponent<EnemyController>().IsDead())
-            rb.AddTorque(-forwardMovement * Time.deltaTime, uppwardMovement * Time.deltaTime, sidewardMovement * Time.deltaTime);
+            rb.AddTorque(movementVector * enemySpeed * Time.deltaTime);
 
+        //Caps speed on the x axis to MaxVelocity
+        if (rb.velocity.x <= -MaxVelocity)
+            rb.velocity = new Vector3 (-MaxVelocity, rb.velocity.y, rb.velocity.z);
+
+        //if (rb.velocity.x >= MaxVelocity)
+        //    rb.velocity = new Vector3(MaxVelocity, rb.velocity.y, rb.velocity.z);
+
+        ////Dont work
+        //if (rb.rotation.x >= MaxRotation || rb.rotation.x <= -MaxRotation)
+        //    rb.rotation.eulerAngles = new Vector3();
+
+        //Debug.Log(rb.velocity);
     }
 }
