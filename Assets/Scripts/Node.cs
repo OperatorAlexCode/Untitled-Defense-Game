@@ -25,7 +25,7 @@ public class Node : MonoBehaviour
         RN = gameObject.GetComponent<ResourceNode>();
         Miner = gameObject.transform.Find("Miner").gameObject;
 
-        hoverText.SetActive(false);
+        //hoverText.SetActive(false);
     }
 
     private void Update()
@@ -74,13 +74,13 @@ public class Node : MonoBehaviour
             }
         }
 
-        hoverText.SetActive(true);
+        //hoverText.SetActive(true);
     }
 
     void OnMouseExit()
     {
         rend.material.color = startColor;
 
-        hoverText.SetActive(false);
+        //hoverText.SetActive(false);
     }
 }

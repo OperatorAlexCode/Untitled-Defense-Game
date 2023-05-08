@@ -205,33 +205,58 @@ public class CannonController : MonoBehaviour
                 #endregion
 
                 #region Change shot Type
-                if (AreAnyKeysPressed(ShotTypeSelectKeys))
+                if (AquiredShot.Count > 1)
                 {
-                    if (IsKeyPressed(ShotTypeSelectKeys[0]))
+                    if (AreAnyKeysPressed(ShotTypeSelectKeys))
                     {
-                        if (CurrentShot == 0)
-                            CurrentShot = (ShotType)Enum.GetValues(typeof(ShotType)).Length - 1;
-                        else
-                            CurrentShot -= 1;
-                    }
-
-                    if (IsKeyPressed(ShotTypeSelectKeys[1]))
-                    {
-                        if (CurrentShot == (ShotType)Enum.GetValues(typeof(ShotType)).Length - 1)
-                            CurrentShot = 0;
-                        else
-                            CurrentShot += 1;
-                    }
-                }
-
-                else if (AreAnyKeysPressed(ShotTypeHotKeys))
-                {
-                    foreach (KeyCode key in ShotTypeHotKeys)
-                    {
-                        if (IsKeyPressed(key))
+                        if (IsKeyPressed(ShotTypeSelectKeys[0]))
                         {
-                            CurrentShot = (ShotType)Array.IndexOf(ShotTypeHotKeys, key);
-                            break;
+                            int temp = (int)CurrentShot - 1;
+                            while (temp != (int)CurrentShot)
+                            {
+                                if (AquiredShot.Contains((ShotType)temp))
+                                {
+                                    CurrentShot = (ShotType)temp;
+                                    break;
+                                }
+
+                                else if (temp < 0)
+                                    temp = Enum.GetValues(typeof(ShotType)).Length - 1;
+                                else
+                                    temp -= 1;
+                            }
+                        }
+
+                        if (IsKeyPressed(ShotTypeSelectKeys[1]))
+                        {
+                            int temp = (int)CurrentShot+1;
+                            while (temp != (int)CurrentShot)
+                            {
+                                if (AquiredShot.Contains((ShotType)temp))
+                                {
+                                    CurrentShot = (ShotType)temp;
+                                    break;
+                                }
+
+                                else if (temp == Enum.GetValues(typeof(ShotType)).Length - 1)
+                                    temp = 0;
+                                else
+                                    temp += 1;
+                            } 
+                        }
+                    }
+
+                    else if (AreAnyKeysPressed(ShotTypeHotKeys))
+                    {
+                        foreach (KeyCode key in ShotTypeHotKeys)
+                        {
+                            if (IsKeyPressed(key))
+                            {
+                                ShotType shotType = (ShotType)Array.IndexOf(ShotTypeHotKeys, key);
+                                if (AquiredShot.Contains(shotType))
+                                    CurrentShot = shotType;
+                                break;
+                            }
                         }
                     }
                 }
@@ -357,7 +382,7 @@ public class CannonController : MonoBehaviour
         {
             gameManager.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
             KnockBackUpgradeLevel[shotToUpgrade] += 1;
-        }  
+        }
     }
 
     public void ActivateDeactivate(bool value)
