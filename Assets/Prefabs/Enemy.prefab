@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4723756821563124043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 300, y: 2, z: -37}
+  m_LocalPosition: {x: 300, y: 2, z: -23}
   m_LocalScale: {x: 150, y: 150, z: 150}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -103,7 +103,7 @@ MonoBehaviour:
   movementVector: {x: 0, y: 0, z: 1}
   MaxVelocity: 10
   enemySpeed: 750
-  MaxRotation: 0
+  MaxRotation: 5
 --- !u!114 &9037085032617245782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,11 +119,10 @@ MonoBehaviour:
   Health: 10
   Damage: 3
   AttackCooldown: 0
-  despawnTimer: 10
+  despawnTimer: 5
   knockbackResistance: 1
   countDown: 1
   CurrentState: 0
-  audioSource: {fileID: -6987480474833195745}
   DeathSound: {fileID: 8300000, guid: 65c746a16caa2164aa321f95de49407a, type: 3}
 --- !u!82 &-6987480474833195745
 AudioSource:

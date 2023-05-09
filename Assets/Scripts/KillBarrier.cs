@@ -12,6 +12,7 @@ public class KillBarrier : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
+            //collision.gameObject.GetComponent<EnemyController>().Hurt(float.PositiveInfinity,0,collision.gameObject.transform.position);
             Destroy(collision.gameObject);
     }
 }
