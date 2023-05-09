@@ -57,7 +57,7 @@ public class CannonController : MonoBehaviour
     Vector3 TurretStartRotation;
 
     // ShotType
-    ShotType CurrentShot;
+    public ShotType CurrentShot;
     List<ShotType> AquiredShot;
 
     // Other
