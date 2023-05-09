@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.FilePathAttribute;
 using Random = UnityEngine.Random;
+using UnityEngine.Audio;
 
 public class CannonController : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class CannonController : MonoBehaviour
     // Other
     public Material CannonBallMat;
     bool Active;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -92,11 +94,14 @@ public class CannonController : MonoBehaviour
         KnockBackUpgradeLevel = new int[] { 1, 1, 1 };
         ReserveAmmo = MaxReserveAmmo;
         AquiredShot = new() { ShotType.CannonBall };
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        audioSource.volume = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>().SfxVolume;
         if (Input.anyKey && Active)
             if (AreAnyKeysPressed(Controls.ToArray(), true))
             {
@@ -120,12 +125,16 @@ public class CannonController : MonoBehaviour
                                 break;
                         }
 
+                        audioSource.Play();
+
                         ReserveAmmo[index] -= 1;
                         if (CurrentShot == ShotType.CannonBall)
                             ReserveAmmo[index] += 1;
 
                         Cooldowns[index] = MaxCooldowns[index];
                     }
+
+                    
                 }
                 #endregion
 

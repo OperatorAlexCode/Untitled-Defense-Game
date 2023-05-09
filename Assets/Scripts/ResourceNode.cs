@@ -16,16 +16,18 @@ public class ResourceNode : MonoBehaviour
     // other
     public ResourceType Type;
     public bool IsMined;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        audioSource.volume = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>().SfxVolume;
         if (MinerHealth < 0 && IsMined == true)
         {
             IsMined = false;
@@ -60,6 +62,8 @@ public class ResourceNode : MonoBehaviour
             if (collision.gameObject.GetComponent<EnemyController>().CurrentState != EnemyController.EnemyState.Dead)
             {
                 MinerHealth -= collision.gameObject.GetComponent<EnemyController>().Damage;
+                audioSource.Play();
+
                 if (MinerHealth <= 0)
                     IsMined = false;
 

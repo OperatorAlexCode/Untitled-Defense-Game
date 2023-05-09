@@ -15,16 +15,20 @@ public class EnemyController : MonoBehaviour
 
     // Other
     public EnemyState CurrentState;
+    public AudioClip DeathSound;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentState = EnemyState.Moving;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        audioSource.volume = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>().SfxVolume;
         // Enemy logic
         if (CurrentState != EnemyState.Dead)
         {
@@ -52,11 +56,13 @@ public class EnemyController : MonoBehaviour
 
         if (Health <= 0)
         {
+            audioSource.clip = DeathSound;
             CurrentState = EnemyState.Dead;
             knockbackVector *= knockback;
         }
-
+        
         GetComponent<Rigidbody>().AddForce(knockbackVector, ForceMode.Impulse);
+        audioSource.Play();
     }
 
     //If the enemy collides with an object:
