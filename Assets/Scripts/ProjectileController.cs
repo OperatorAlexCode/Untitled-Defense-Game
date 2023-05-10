@@ -29,7 +29,7 @@ public class ProjectileController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<EnemyController>().Hurt(Damage, knockBack, transform.position);
+            collision.gameObject.GetComponent<EnemyController>().Hurt(Damage, knockBack, transform.position, GetComponent<Rigidbody>().velocity);
             LifeTime = DeathDestroyDelay;
             Age = 0;
         }

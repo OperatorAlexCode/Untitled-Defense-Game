@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         GoldText.text = $"Gold: {GM.Resources[ResourceType.gold]}";
-        GunPowerText.text = $"GunPower: {GM.Resources[ResourceType.gunpowder]}";
+        GunPowerText.text = $"GunPowder: {GM.Resources[ResourceType.gunpowder]}";
         WaveText.text = $"Wave: {GM.CurrentWave}";
         HealthText.text = $"Health: {GM.PlayerHealth}";
 

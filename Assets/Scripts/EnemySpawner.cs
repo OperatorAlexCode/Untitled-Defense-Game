@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     public float activeWaveTimer = 20;
     //Time Between spawned enemies  (not implemented yet)
     public float enemySpawnTimer = 5;
+    public float SpawnDist;
 
     public TextMeshProUGUI timerText;
 
@@ -91,20 +92,20 @@ public class EnemySpawner : MonoBehaviour
         if (enemySpawnNumber < 80 && enemySpawnNumber > 20)
         {
             Transform enemytransform = enemy.transform;
-            enemytransform.position = new Vector3(300, 2, Random.Range(-50, 50));
+            enemytransform.position = new Vector3(SpawnDist, 2, Random.Range(-50, 50));
             Instantiate(enemy, enemytransform);
         }
         else if (enemySpawnNumber < 21)
         {
             Transform fastEnemytransform = fastEnemy.transform;
-            fastEnemytransform.position = new Vector3(300, 5, Random.Range(-50, 50));
+            fastEnemytransform.position = new Vector3(SpawnDist, 5, Random.Range(-50, 50));
             Instantiate(fastEnemy, fastEnemytransform);
         }
 
         else if (enemySpawnNumber > 79)
         {
             Transform gianttransform = giant.transform;
-            gianttransform.position = new Vector3(300, 5, Random.Range(-50, 50));
+            gianttransform.position = new Vector3(SpawnDist, 5, Random.Range(-50, 50));
             Instantiate(giant, gianttransform);
         }
     }

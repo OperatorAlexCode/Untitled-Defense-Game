@@ -55,6 +55,7 @@ public class CannonController : MonoBehaviour
     // Vector3
     Vector3 BarrelStartRotation;
     Vector3 TurretStartRotation;
+    Vector3 MousePos;
 
     // ShotType
     public ShotType CurrentShot;
@@ -64,6 +65,7 @@ public class CannonController : MonoBehaviour
     public Material CannonBallMat;
     bool Active;
     AudioSource audioSource;
+    PlayerSettings Settings;
 
     // Start is called before the first frame update
     void Start()
@@ -71,15 +73,15 @@ public class CannonController : MonoBehaviour
         CurrentShot = ShotType.CannonBall;
 
         // Sets controls and settings from PlayerSettings
-        PlayerSettings settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
+        Settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
 
-        MovementKeys = settings.MovementKeys;
-        ShotTypeHotKeys = settings.ShotTypeHotKeys;
-        ShotTypeSelectKeys = settings.ShotTypesSelectKeys;
-        FireKey = settings.FireKey;
-        SlowDownKey = settings.SlowDownKey;
-        SlowDownFactor = settings.SlowDownStrength;
-        RotationSpeed = settings.RotationSpeed;
+        MovementKeys = Settings.MovementKeys;
+        ShotTypeHotKeys = Settings.ShotTypeHotKeys;
+        ShotTypeSelectKeys = Settings.ShotTypesSelectKeys;
+        FireKey = Settings.FireKey;
+        SlowDownKey = Settings.SlowDownKey;
+        SlowDownFactor = Settings.SlowDownStrength;
+        RotationSpeed = Settings.RotationSpeed;
 
         Controls = new List<KeyCode>() { FireKey, SlowDownKey };
         Controls.AddRange(MovementKeys);
@@ -134,7 +136,7 @@ public class CannonController : MonoBehaviour
                         Cooldowns[index] = MaxCooldowns[index];
                     }
 
-                    
+
                 }
                 #endregion
 
@@ -144,72 +146,23 @@ public class CannonController : MonoBehaviour
                 if (IsKeyPressed(SlowDownKey, true))
                     rotationamount *= SlowDownFactor;
 
-                Vector3 barrelRotation = Barrel.transform.localEulerAngles;
-                Vector3 turretRotation = Turret.transform.localEulerAngles;
-
-                // Rotate Turret Left
-                if (IsKeyPressed(MovementKeys[2], true) && !IsKeyPressed(MovementKeys[3], true))
+                if (Settings.KeyboardAimingMode)
                 {
-                    if (CurrentRotation + rotationamount > RotationYMinMax)
-                    {
-                        turretRotation = new Vector3(turretRotation.x, TurretStartRotation.y + RotationYMinMax, turretRotation.z);
-                        CurrentRotation = +RotationYMinMax;
-                    }
+                    // Rotate Turret Left
+                    if (IsKeyPressed(MovementKeys[2], true) && !IsKeyPressed(MovementKeys[3], true))
+                        RotateLeft(rotationamount);
 
-                    else
-                    {
-                        Turret.transform.Rotate(Vector3.back, rotationamount);
-                        CurrentRotation += rotationamount;
-                    }
-                }
+                    // Rotate Turret Right
+                    if (IsKeyPressed(MovementKeys[3], true) && !IsKeyPressed(MovementKeys[2], true))
+                        RotateRight(rotationamount);
 
-                // Rotate Turret Right
-                if (IsKeyPressed(MovementKeys[3], true) && !IsKeyPressed(MovementKeys[2], true))
-                {
-                    if (CurrentRotation - rotationamount < -RotationYMinMax)
-                    {
-                        turretRotation = new Vector3(turretRotation.x, TurretStartRotation.y - RotationYMinMax, turretRotation.z);
-                        CurrentRotation = -RotationYMinMax;
-                    }
+                    // Angle Barrel Up
+                    if (IsKeyPressed(MovementKeys[0], true) && !IsKeyPressed(MovementKeys[1], true))
+                        AngleUp(rotationamount);
 
-                    else
-                    {
-                        Turret.transform.Rotate(Vector3.forward, rotationamount);
-                        CurrentRotation -= rotationamount;
-                    }
-                }
-
-                // Angle Barrel Up
-                if (IsKeyPressed(MovementKeys[0], true) && !IsKeyPressed(MovementKeys[1], true))
-                {
-                    if (CurrentAngle + rotationamount > RotationUpMax && CurrentAngle! >= RotationUpMax)
-                    {
-                        barrelRotation = new Vector3(BarrelStartRotation.x + RotationUpMax, barrelRotation.y, barrelRotation.z);
-                        CurrentAngle = RotationUpMax;
-                    }
-
-                    else
-                    {
-                        Barrel.transform.Rotate(Vector3.right, rotationamount);
-                        CurrentAngle += rotationamount;
-                    }
-                }
-
-                // Angle Barrel Down
-                if (IsKeyPressed(MovementKeys[1], true) && !IsKeyPressed(MovementKeys[0], true))
-                {
-                    if (CurrentAngle - rotationamount < -RotationDownMin && CurrentAngle! <= -RotationDownMin)
-                    {
-                        barrelRotation = new Vector3(BarrelStartRotation.x - RotationDownMin, barrelRotation.y, barrelRotation.z);
-                        CurrentAngle = -RotationDownMin;
-                    }
-
-                    else
-                    {
-                        Barrel.transform.Rotate(Vector3.left, rotationamount);
-                        CurrentAngle -= rotationamount;
-                    }
-
+                    // Angle Barrel Down
+                    if (IsKeyPressed(MovementKeys[1], true) && !IsKeyPressed(MovementKeys[0], true))
+                        AngleDown(rotationamount);
                 }
                 #endregion
 
@@ -238,7 +191,7 @@ public class CannonController : MonoBehaviour
 
                         if (IsKeyPressed(ShotTypeSelectKeys[1]))
                         {
-                            int temp = (int)CurrentShot+1;
+                            int temp = (int)CurrentShot + 1;
                             while (temp != (int)CurrentShot)
                             {
                                 if (AquiredShot.Contains((ShotType)temp))
@@ -251,7 +204,7 @@ public class CannonController : MonoBehaviour
                                     temp = 0;
                                 else
                                     temp += 1;
-                            } 
+                            }
                         }
                     }
 
@@ -368,6 +321,76 @@ public class CannonController : MonoBehaviour
         return cannonBall;
     }
 
+    void RotateLeft(float rotationAmount)
+    {
+        Vector3 turretRotation = Turret.transform.localEulerAngles;
+
+        if (CurrentRotation + rotationAmount > RotationYMinMax)
+        {
+            turretRotation = new Vector3(turretRotation.x, TurretStartRotation.y + RotationYMinMax, turretRotation.z);
+            CurrentRotation = +RotationYMinMax;
+        }
+
+        else
+        {
+            Turret.transform.Rotate(Vector3.back, rotationAmount);
+            CurrentRotation += rotationAmount;
+        }
+    }
+
+    void RotateRight(float rotationAmount)
+    {
+        Vector3 turretRotation = Turret.transform.localEulerAngles;
+
+        if (CurrentRotation - rotationAmount < -RotationYMinMax)
+        {
+            turretRotation = new Vector3(turretRotation.x, TurretStartRotation.y - RotationYMinMax, turretRotation.z);
+            CurrentRotation = -RotationYMinMax;
+        }
+
+        else
+        {
+            Turret.transform.Rotate(Vector3.forward, rotationAmount);
+            CurrentRotation -= rotationAmount;
+        }
+
+    }
+
+    void AngleUp(float rotationAmount)
+    {
+        Vector3 barrelRotation = Barrel.transform.localEulerAngles;
+
+        if (CurrentAngle + rotationAmount > RotationUpMax && CurrentAngle! >= RotationUpMax)
+        {
+            barrelRotation = new Vector3(BarrelStartRotation.x + RotationUpMax, barrelRotation.y, barrelRotation.z);
+            CurrentAngle = RotationUpMax;
+        }
+
+        else
+        {
+            Barrel.transform.Rotate(Vector3.right, rotationAmount);
+            CurrentAngle += rotationAmount;
+        }
+    }
+
+    void AngleDown(float rotationAmount)
+    {
+        Vector3 barrelRotation = Barrel.transform.localEulerAngles;
+
+        if (CurrentAngle - rotationAmount < -RotationDownMin && CurrentAngle! <= -RotationDownMin)
+        {
+            barrelRotation = new Vector3(BarrelStartRotation.x - RotationDownMin, barrelRotation.y, barrelRotation.z);
+            CurrentAngle = -RotationDownMin;
+        }
+
+        else
+        {
+            Barrel.transform.Rotate(Vector3.left, rotationAmount);
+            CurrentAngle -= rotationAmount;
+        }
+    }
+
+
     float GetRandomNumber(float range)
     {
         return Random.Range(-range, range);
@@ -401,7 +424,12 @@ public class CannonController : MonoBehaviour
 
     public void RestockAmmo(int shotToRestock)
     {
-        ReserveAmmo[shotToRestock] = MaxReserveAmmo[shotToRestock];
+        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        if (gameManager.Resources[ResourceType.gunpowder] >= RestockPrice[shotToRestock])
+        {
+            gameManager.Resources[ResourceType.gunpowder] -= RestockPrice[shotToRestock];
+            ReserveAmmo[shotToRestock] = MaxReserveAmmo[shotToRestock];
+        }
     }
 
     public void AquireShotType(int shotToAquire)

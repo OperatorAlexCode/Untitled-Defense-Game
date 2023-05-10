@@ -48,31 +48,23 @@ public class EnemyController : MonoBehaviour
        
     }
 
-    public void Hurt(float damage, float knockback, Vector3 projectilePos)
+    public void Hurt(float damage, float knockback, Vector3 projectilePos, Vector3 projectileVel)
     {
         Health -= damage;
 
-        Vector3 knockbackVector = (transform.position - projectilePos).normalized * knockback / knockbackResistance;
+        Vector3 knockbackVector = (transform.position - projectilePos + projectileVel).normalized;
 
         if (Health <= 0)
         {
             audioSource.clip = DeathSound;
             CurrentState = EnemyState.Dead;
-            knockbackVector *= knockback;
+            knockbackVector *= (knockback/knockbackResistance) * 10;
         }
-        
+        else
+            knockbackVector *= knockback/knockbackResistance;
+
         GetComponent<Rigidbody>().AddForce(knockbackVector, ForceMode.Impulse);
         audioSource.Play();
-    }
-
-    //If the enemy collides with an object:
-    void onCollisionEnter(Collision collisionInfo)
-    {
-        //If it collides with a wall:
-        if (collisionInfo.collider.name == "Wall")
-        {
-            CurrentState = EnemyState.Dead;
-        }
     }
 
     public bool IsDead()
