@@ -10,6 +10,7 @@ public class PlayerSettings : MonoBehaviour
     public float SlowDownStrength = 0.5f;
     public float MusicVolume = 0.75f;
     public float SfxVolume = 0.65f;
+    public float MouseSensitivity = 1.0f;
 
     // Keycode
     public KeyCode[] MovementKeys = new KeyCode[] {KeyCode.W,KeyCode.S, KeyCode.A, KeyCode.D };
@@ -17,6 +18,7 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode[] ShotTypesSelectKeys = new KeyCode[] { KeyCode.Q, KeyCode.E };
     public KeyCode FireKey = KeyCode.Space;
     public KeyCode SlowDownKey = KeyCode.LeftShift;
+    public KeyCode PauseKey = KeyCode.P;
 
     // Other
     public Color PlayerColor;

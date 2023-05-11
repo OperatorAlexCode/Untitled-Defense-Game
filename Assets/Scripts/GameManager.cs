@@ -7,14 +7,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Dictionary<ResourceType,int> Resources;
+    // Int
     public int CurrentWave;
-    public float PlayerHealth;
+    public int PassiveGoldIncome;
+
+    // Bool
     public bool InWave;
+    public bool Paused;
+
+    // Other
+    public Dictionary<ResourceType,int> Resources;
+    public float PlayerHealth;
     public EnemySpawner SpawnManager;
     public List<ResourceNode> Nodes;
-    public int PassiveGoldIncome;
     public Material[] PlayerMats;
+    public PlayerSettings Settings;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +38,10 @@ public class GameManager : MonoBehaviour
 
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
 
-        PlayerSettings settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
+        Settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
 
         foreach (Material mat in PlayerMats)
-            mat.color = settings.PlayerColor;
+            mat.color = Settings.PlayerColor;
     }
 
     // Update is called once per frame
@@ -46,6 +54,9 @@ public class GameManager : MonoBehaviour
 
         if (InWave && (enemies.All(e => e.GetComponent<EnemyController>().CurrentState == EnemyController.EnemyState.Dead) || enemies.Length == 0) && SpawnManager.activeWaveTimer <= 0)
             StopWave();
+
+        if (Input.GetKeyDown(Settings.PauseKey))
+            Pause();
     }
 
     public void StartWave()
@@ -79,5 +90,21 @@ public class GameManager : MonoBehaviour
     public void LoseHealth(float damage)
     {
         PlayerHealth -= damage;
+    }
+
+    public void Pause()
+    {
+        Paused = !Paused;
+
+        if (Paused)
+        {
+            Time.timeScale = 0;
+            GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowPauseMenu();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().HidePauseMenu();
+        } 
     }
 }

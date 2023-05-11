@@ -29,6 +29,10 @@ public class CannonController : MonoBehaviour
     float CurrentAngle;
     float CurrentRotation;
     public float SlowDownFactor;
+    // Float | Mouse
+    float MouseX;
+    float MouseY;
+    public float MouseSensitivity;
 
     // Int
     public int UpgradeCostIncrement;
@@ -55,7 +59,6 @@ public class CannonController : MonoBehaviour
     // Vector3
     Vector3 BarrelStartRotation;
     Vector3 TurretStartRotation;
-    Vector3 MousePos;
 
     // ShotType
     public ShotType CurrentShot;
@@ -66,6 +69,7 @@ public class CannonController : MonoBehaviour
     bool Active;
     AudioSource audioSource;
     PlayerSettings Settings;
+    GameManager GM;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +78,7 @@ public class CannonController : MonoBehaviour
 
         // Sets controls and settings from PlayerSettings
         Settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
+        GM = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         MovementKeys = Settings.MovementKeys;
         ShotTypeHotKeys = Settings.ShotTypeHotKeys;
@@ -103,12 +108,13 @@ public class CannonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        audioSource.volume = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>().SfxVolume;
+        audioSource.volume = Settings.SfxVolume;
+        MouseSensitivity = Settings.MouseSensitivity;
         if (Input.anyKey && Active)
-            if (AreAnyKeysPressed(Controls.ToArray(), true))
+            if (AreAnyKeysPressed(Controls.ToArray(), true) || AreMouseButtonsPressed())
             {
                 #region Shoot cannon with current shot type
-                if (IsKeyPressed(FireKey))
+                if ((IsKeyPressed(FireKey) && Settings.KeyboardAimingMode) || (Input.GetMouseButtonDown(0) && !Settings.KeyboardAimingMode))
                 {
                     int index = (int)CurrentShot;
 
@@ -135,19 +141,17 @@ public class CannonController : MonoBehaviour
 
                         Cooldowns[index] = MaxCooldowns[index];
                     }
-
-
                 }
                 #endregion
 
                 #region Moving Turret
-                float rotationamount = RotationSpeed * Time.deltaTime;
-
-                if (IsKeyPressed(SlowDownKey, true))
-                    rotationamount *= SlowDownFactor;
-
                 if (Settings.KeyboardAimingMode)
                 {
+                    float rotationamount = RotationSpeed * Time.deltaTime;
+
+                    if (IsKeyPressed(SlowDownKey, true))
+                        rotationamount *= SlowDownFactor;
+
                     // Rotate Turret Left
                     if (IsKeyPressed(MovementKeys[2], true) && !IsKeyPressed(MovementKeys[3], true))
                         RotateLeft(rotationamount);
@@ -225,6 +229,32 @@ public class CannonController : MonoBehaviour
                 #endregion
             }
 
+        // Rotates cannon by mouse movements
+        if (!Settings.KeyboardAimingMode && Active && !GM.Paused)
+        {
+            if (MouseX != Input.GetAxis("Mouse X"))
+            {
+                float rotateX = MouseX - Input.GetAxis("Mouse X");
+                if (rotateX < 0)
+                    RotateLeft(rotateX * MouseSensitivity);
+                else
+                    RotateRight(-rotateX * MouseSensitivity);
+
+                MouseX = Input.GetAxis("Mouse X") + rotateX;
+            }
+
+            if (MouseY != Input.GetAxis("Mouse Y"))
+            {
+                float rotateY = MouseY - Input.GetAxis("Mouse Y");
+                if (rotateY < 0)
+                    AngleUp(-rotateY * MouseSensitivity);
+                else
+                    AngleDown(rotateY * MouseSensitivity);
+
+                MouseY = Input.GetAxis("Mouse Y") + rotateY;
+            }
+        }
+
         for (int x = 0; x < Cooldowns.Length; x++)
             if (Cooldowns[x] > 0)
                 Cooldowns[x] -= Time.deltaTime;
@@ -250,6 +280,15 @@ public class CannonController : MonoBehaviour
             return Input.GetKey(keyToCheck);
         else
             return Input.GetKeyDown(keyToCheck);
+    }
+
+    /// <summary>
+    /// Chekcs if mouse buttons 1 or 2 is pressed
+    /// </summary>
+    /// <returns>returns true if mouse button 1 or 2 is pressed, otherwise returns false</returns>
+    bool AreMouseButtonsPressed()
+    {
+        return Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1);
     }
 
     void CannonBall()
@@ -321,6 +360,10 @@ public class CannonController : MonoBehaviour
         return cannonBall;
     }
 
+    /// <summary>
+    /// Rotate turret left
+    /// </summary>
+    /// <param name="rotationAmount">The amount to roate</param>
     void RotateLeft(float rotationAmount)
     {
         Vector3 turretRotation = Turret.transform.localEulerAngles;
@@ -328,7 +371,7 @@ public class CannonController : MonoBehaviour
         if (CurrentRotation + rotationAmount > RotationYMinMax)
         {
             turretRotation = new Vector3(turretRotation.x, TurretStartRotation.y + RotationYMinMax, turretRotation.z);
-            CurrentRotation = +RotationYMinMax;
+            CurrentRotation = RotationYMinMax;
         }
 
         else
@@ -338,6 +381,10 @@ public class CannonController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Angles turret right
+    /// </summary>
+    /// <param name="rotationAmount">The amount to roate</param>
     void RotateRight(float rotationAmount)
     {
         Vector3 turretRotation = Turret.transform.localEulerAngles;
@@ -356,6 +403,10 @@ public class CannonController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Angles cannon barrel up
+    /// </summary>
+    /// <param name="rotationAmount">The amount to roate</param>
     void AngleUp(float rotationAmount)
     {
         Vector3 barrelRotation = Barrel.transform.localEulerAngles;
@@ -373,6 +424,10 @@ public class CannonController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Angles cannon barrel down
+    /// </summary>
+    /// <param name="rotationAmount">The amount to roate</param>
     void AngleDown(float rotationAmount)
     {
         Vector3 barrelRotation = Barrel.transform.localEulerAngles;
@@ -390,7 +445,6 @@ public class CannonController : MonoBehaviour
         }
     }
 
-
     float GetRandomNumber(float range)
     {
         return Random.Range(-range, range);
@@ -398,10 +452,9 @@ public class CannonController : MonoBehaviour
 
     public void UpgradeDamage(int shotToUpgrade)
     {
-        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (gameManager.Resources[ResourceType.gunpowder] >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        if (GM.Resources[ResourceType.gunpowder] >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
-            gameManager.Resources[ResourceType.gunpowder] -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            GM.Resources[ResourceType.gunpowder] -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
             DamageUpgradeLevel[shotToUpgrade] += 1;
         }
 
@@ -409,10 +462,9 @@ public class CannonController : MonoBehaviour
 
     public void UpgradeknockBack(int shotToUpgrade)
     {
-        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (gameManager.Resources[ResourceType.gunpowder] >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        if (GM.Resources[ResourceType.gunpowder] >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
-            gameManager.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            GM.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
             KnockBackUpgradeLevel[shotToUpgrade] += 1;
         }
     }
@@ -420,24 +472,28 @@ public class CannonController : MonoBehaviour
     public void ActivateDeactivate(bool value)
     {
         Active = value;
+
+        if (Active)
+        {
+            MouseX = Input.GetAxis("Mouse X");
+            MouseY = Input.GetAxis("Mouse Y");
+        }
     }
 
     public void RestockAmmo(int shotToRestock)
     {
-        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (gameManager.Resources[ResourceType.gunpowder] >= RestockPrice[shotToRestock])
+        if (GM.Resources[ResourceType.gunpowder] >= RestockPrice[shotToRestock])
         {
-            gameManager.Resources[ResourceType.gunpowder] -= RestockPrice[shotToRestock];
+            GM.Resources[ResourceType.gunpowder] -= RestockPrice[shotToRestock];
             ReserveAmmo[shotToRestock] = MaxReserveAmmo[shotToRestock];
         }
     }
 
     public void AquireShotType(int shotToAquire)
     {
-        GameManager gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        if (!AquiredShot.Contains((ShotType)shotToAquire) && gameManager.Resources[ResourceType.gunpowder] >= AcquisitionCost[shotToAquire])
+        if (!AquiredShot.Contains((ShotType)shotToAquire) && GM.Resources[ResourceType.gunpowder] >= AcquisitionCost[shotToAquire])
         {
-            gameManager.Resources[ResourceType.gunpowder] -= AcquisitionCost[shotToAquire];
+            GM.Resources[ResourceType.gunpowder] -= AcquisitionCost[shotToAquire];
             AquiredShot.Add((ShotType)shotToAquire);
             GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowUpgrades(shotToAquire);
         }

@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     public GameObject CannonHUD;
     public GameObject[] UpgradeButtons;
     public GameObject[] AquireButtons;
+    public GameObject PauseMenu;
+    public GameObject InGameUI;
 
     // Other
     public GameManager GM;
@@ -74,5 +76,17 @@ public class UIManager : MonoBehaviour
     {
         AquireButtons[shotType].SetActive(false);
         UpgradeButtons[shotType].SetActive(true);
+    }
+
+    public void ShowPauseMenu()
+    {
+        PauseMenu.SetActive(true);
+        InGameUI.SetActive(false);
+    }
+
+    public void HidePauseMenu()
+    {
+        PauseMenu.SetActive(false);
+        InGameUI.SetActive(true);
     }
 }
