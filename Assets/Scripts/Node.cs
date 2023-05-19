@@ -14,11 +14,15 @@ public class Node : MonoBehaviour
     private Color startColor;
     public GameObject Miner;
     public GameObject hoverText;
+    
+    GameManager gameManager;
 
     ResourceNode RN;
 
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
 
@@ -49,22 +53,22 @@ public class Node : MonoBehaviour
             Debug.Log("Can not build on an existing mine!");
             return;
         }
-        else if (GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[ResourceType.gold] >= 100)
+        else if (gameManager.Resources[ResourceType.gold] >= 100 && !gameManager.InWave)
         {
             Miner.SetActive(true);
             RN.BuildMiner();
-            GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[ResourceType.gold] -= 100;
+            gameManager.Resources[ResourceType.gold] -= 100;
         }
     }
 
     void OnMouseEnter()
     {
-        if (!RN.IsMined && !GameObject.Find("Game Manager").GetComponent<GameManager>().InWave)
+        if (!RN.IsMined && !gameManager.InWave)
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if (GameObject.Find("Game Manager").GetComponent<GameManager>().Resources[ResourceType.gold] >= 100)
+            if (gameManager.Resources[ResourceType.gold] >= 100)
             {
                 rend.material.color = hoverColor;
             }
