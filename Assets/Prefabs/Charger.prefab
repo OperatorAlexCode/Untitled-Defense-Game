@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3999673693169078832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 5, z: 19}
+  m_LocalPosition: {x: 0, y: 5, z: 6}
   m_LocalScale: {x: 150, y: 150, z: 150}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -120,6 +120,10 @@ MonoBehaviour:
   MaxVelocity: 20
   enemySpeed: 1500
   MaxRotation: 5
+  canJump: 1
+  jumpFrequency: 2
+  jumpTimer: 0
+  jumpAmount: 1000
 --- !u!114 &3999673693169078799
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,11 +16,19 @@ public class EnemyMovement : MonoBehaviour
     public float enemySpeed;
     public float MaxRotation;
 
+    //Vectors for jumping
+    public bool canJump;
+    public float jumpFrequency = 2;
+    public float jumpTimer;
+    public float jumpAmount = 1000;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        jumpTimer = jumpFrequency;
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -33,13 +41,20 @@ public class EnemyMovement : MonoBehaviour
         if (rb.velocity.x <= -MaxVelocity)
             rb.velocity = new Vector3 (-MaxVelocity, rb.velocity.y, rb.velocity.z);
 
-        //if (rb.velocity.x >= MaxVelocity)
-        //    rb.velocity = new Vector3(MaxVelocity, rb.velocity.y, rb.velocity.z);
+        //The code runs if canjump is true and their above the games groundlevel of 5
+        if (canJump == true && rb.position.y <= 5)
+        {
+            //The timer is moved down
+            jumpTimer = jumpTimer -= Time.deltaTime;
 
-        ////Dont work
-        //if (rb.rotation.x >= MaxRotation || rb.rotation.x <= -MaxRotation)
-        //    rb.rotation.eulerAngles = new Vector3();
+            //If the timer reach 0 its reset and 
+            if (jumpTimer < 0)
+            {
+                rb.AddForce(0, jumpAmount, 0);
 
-        //Debug.Log(rb.velocity);
+                //Resets the timer
+                jumpTimer = jumpFrequency;
+            }
+        }
     }
 }
