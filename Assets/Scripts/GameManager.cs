@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayDayTheme();
         SpawnManager.StartStopWave(true);
         InWave = true;
+        Cursor.visible = false;
     }
 
     public void StopWave()
@@ -84,7 +85,8 @@ public class GameManager : MonoBehaviour
 
         Resources[ResourceType.gold] += PassiveGoldIncome;
         GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayNightTheme();
-        
+        Cursor.visible = true;
+
     }
 
     public void LoseHealth(float damage)
