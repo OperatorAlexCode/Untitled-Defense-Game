@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 222872680}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1896,7 +1896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeWaveTimer: 20
   enemySpawnTimer: 5
-  SpawnDist: 250
+  SpawnDist: 0
   timerText: {fileID: 0}
   enemy: {fileID: 4723756821563124043, guid: 3d4e1669d8a445142ba08f0362528e0d, type: 3}
   giant: {fileID: 4581461161189949145, guid: 2b3ab1599a688d348b00349b32a98cc0, type: 3}
