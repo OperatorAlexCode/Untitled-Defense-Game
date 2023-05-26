@@ -498,6 +498,29 @@ public class CannonController : MonoBehaviour
             GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowUpgrades(shotToAquire);
         }
     }
+
+    public int GetCost(ShotType shotToUpgrade, CostType costType)
+    {
+        int output = 0;
+
+        switch (costType)
+        {
+            case CostType.Damage:
+                output = DamageUpgradeLevel[(int)shotToUpgrade] * UpgradeCostIncrement;
+                break;
+            case CostType.Knockback:
+                output = KnockBackUpgradeLevel[(int)shotToUpgrade] * UpgradeCostIncrement;
+                break;
+            case CostType.Restock:
+                output = RestockPrice[(int)shotToUpgrade];
+                break;
+            case CostType.Acquisition:
+                output = AcquisitionCost[(int)shotToUpgrade];
+                break;
+        }
+
+        return output;
+    }
 }
 
 public enum ShotType
@@ -505,4 +528,12 @@ public enum ShotType
     CannonBall,
     GrapeShot,
     RailGun
+}
+
+public enum CostType
+{
+    Damage,
+    Knockback,
+    Restock,
+    Acquisition
 }
