@@ -2,6 +2,7 @@ using Palmmedia.ReportGenerator.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,10 +24,14 @@ public class SettingsSceneController : MonoBehaviour
     PlayerSettings Settings;
     [SerializeField]
     Toggle KeyboardAimingMode;
+    [SerializeField]
+    TMP_InputField PlayerColor;
 
     private void Awake()
     {
         GameObject.Find("MainMenu").gameObject.GetComponent<Button>().onClick.AddListener(SceneController.LoadMainMenuScene);
+        GameObject.Find("Change Keybinds").gameObject.GetComponent<Button>().onClick.AddListener(SceneController.LoadKeyBindsScene);
+
         Settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
 
         UpdateSettingsScene();
@@ -52,6 +57,10 @@ public class SettingsSceneController : MonoBehaviour
         Settings.RotationSpeed = RotationSpeed.value;
         Settings.SlowDownStrength = SlowDownStrength.value;
         Settings.KeyboardAimingMode = KeyboardAimingMode.isOn;
+
+        Color color;
+        if (ColorUtility.TryParseHtmlString(PlayerColor.text, out color) && PlayerColor.text != "")
+            Settings.PlayerColor = color;
     }
 
     void UpdateSettingsScene()
@@ -62,5 +71,6 @@ public class SettingsSceneController : MonoBehaviour
         RotationSpeed.value = Settings.RotationSpeed;
         SlowDownStrength.value = Settings.SlowDownStrength;
         KeyboardAimingMode.isOn = Settings.KeyboardAimingMode;
+        PlayerColor.text = ColorUtility.ToHtmlStringRGB(Settings.PlayerColor);
     }
 }

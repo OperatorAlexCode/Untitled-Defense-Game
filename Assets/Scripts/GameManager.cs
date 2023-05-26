@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Resources = new Dictionary<ResourceType,int>();
 
@@ -37,6 +39,10 @@ public class GameManager : MonoBehaviour
         Resources[ResourceType.gold] = 200;
 
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
+
+        GameObject.Find("Main Menu").gameObject.GetComponent<Button>().onClick.AddListener(SceneController.LoadMainMenuScene);
+        GameObject.Find("Exit").gameObject.GetComponent<Button>().onClick.AddListener(SceneController.ExitApplication);
+        GameObject.Find("Pause Menu").gameObject.SetActive(false);
 
         Settings = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>();
 
@@ -86,7 +92,6 @@ public class GameManager : MonoBehaviour
         Resources[ResourceType.gold] += PassiveGoldIncome;
         GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayNightTheme();
         Cursor.visible = true;
-
     }
 
     public void LoseHealth(float damage)

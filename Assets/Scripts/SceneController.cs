@@ -6,10 +6,11 @@ using UnityEngine;
 
 public static class SceneController
 {
-    static string GameSceneName = "InGame";
-    static string MainMenuSceneName = "MainMenu";
-    static string SettingsMenuSceneName = "SettingsMenu";
-    static string GameOverSceneName = "Game Over";
+    static readonly string GameSceneName = "InGame";
+    static readonly string MainMenuSceneName = "MainMenu";
+    static readonly string SettingsMenuSceneName = "SettingsMenu";
+    static readonly string GameOverSceneName = "Game Over";
+    static readonly string KeybindsSceneName = "KeyBinds";
 
     static public void LoadGameScene()
     {
@@ -29,6 +30,11 @@ public static class SceneController
     static public void LoadSettingsMenuScene()
     {
         LoadScene(SettingsMenuSceneName);
+    }
+
+    static public void LoadKeyBindsScene()
+    {
+        LoadScene(KeybindsSceneName);
     }
 
     static public void ExitApplication()
