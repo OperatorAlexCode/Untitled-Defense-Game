@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     // Int
     public int CurrentWave;
-    public int PassiveGoldIncome;
+    public int PassiveIncome;
 
     // Bool
     public bool InWave;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         foreach (int type in Enum.GetValues(typeof(ResourceType)))
             Resources.Add(Enum.Parse<ResourceType>(resourceNames[type]),0);
 
-        Resources[ResourceType.gold] = 200;
+        Resources[ResourceType.iron] = 200;
 
         GameObject.Find("DayNightManager").gameObject.GetComponent<WaveCycle>().TurnSunOff();
 
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         foreach (ResourceNode rn in Nodes)
             rn.GetResource();
 
-        Resources[ResourceType.gold] += PassiveGoldIncome;
+        Resources[ResourceType.iron] += PassiveIncome;
         GameObject.Find("Music Manager").gameObject.GetComponent<MusicManager>().PlayNightTheme();
         Cursor.visible = true;
     }

@@ -14,7 +14,10 @@ public class Node : MonoBehaviour
     private Color startColor;
     public GameObject Miner;
     public GameObject hoverText;
-    
+
+    [SerializeField]
+    int constructionCost = 200;
+
     GameManager gameManager;
 
     ResourceNode RN;
@@ -53,11 +56,11 @@ public class Node : MonoBehaviour
             Debug.Log("Can not build on an existing mine!");
             return;
         }
-        else if (gameManager.Resources[ResourceType.gold] >= 100 && !gameManager.InWave)
+        else if (gameManager.Resources[ResourceType.iron] >= constructionCost && !gameManager.InWave)
         {
             Miner.SetActive(true);
             RN.BuildMiner();
-            gameManager.Resources[ResourceType.gold] -= 100;
+            gameManager.Resources[ResourceType.iron] -= constructionCost;
         }
     }
 
@@ -68,7 +71,7 @@ public class Node : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if (gameManager.Resources[ResourceType.gold] >= 100)
+            if (gameManager.Resources[ResourceType.iron] >= constructionCost)
             {
                 rend.material.color = hoverColor;
             }

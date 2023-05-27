@@ -4,6 +4,6 @@ using UnityEngine;
 
 public enum ResourceType
 {
-    gold,
-    gunpowder
+    iron,
+    tungsten
 }

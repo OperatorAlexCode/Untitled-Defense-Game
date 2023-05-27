@@ -452,9 +452,9 @@ public class CannonController : MonoBehaviour
 
     public void UpgradeDamage(int shotToUpgrade)
     {
-        if (GM.Resources[ResourceType.gunpowder] >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        if (GM.Resources[ResourceType.tungsten] >= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
-            GM.Resources[ResourceType.gunpowder] -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            GM.Resources[ResourceType.tungsten] -= DamageUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
             DamageUpgradeLevel[shotToUpgrade] += 1;
         }
 
@@ -462,9 +462,9 @@ public class CannonController : MonoBehaviour
 
     public void UpgradeknockBack(int shotToUpgrade)
     {
-        if (GM.Resources[ResourceType.gunpowder] >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
+        if (GM.Resources[ResourceType.tungsten] >= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement)
         {
-            GM.Resources[ResourceType.gunpowder] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
+            GM.Resources[ResourceType.tungsten] -= KnockBackUpgradeLevel[shotToUpgrade] * UpgradeCostIncrement;
             KnockBackUpgradeLevel[shotToUpgrade] += 1;
         }
     }
@@ -482,18 +482,18 @@ public class CannonController : MonoBehaviour
 
     public void RestockAmmo(int shotToRestock)
     {
-        if (GM.Resources[ResourceType.gunpowder] >= RestockPrice[shotToRestock])
+        if (GM.Resources[ResourceType.tungsten] >= RestockPrice[shotToRestock])
         {
-            GM.Resources[ResourceType.gunpowder] -= RestockPrice[shotToRestock];
+            GM.Resources[ResourceType.tungsten] -= RestockPrice[shotToRestock];
             ReserveAmmo[shotToRestock] = MaxReserveAmmo[shotToRestock];
         }
     }
 
     public void AquireShotType(int shotToAquire)
     {
-        if (!AquiredShot.Contains((ShotType)shotToAquire) && GM.Resources[ResourceType.gunpowder] >= AcquisitionCost[shotToAquire])
+        if (!AquiredShot.Contains((ShotType)shotToAquire) && GM.Resources[ResourceType.tungsten] >= AcquisitionCost[shotToAquire])
         {
-            GM.Resources[ResourceType.gunpowder] -= AcquisitionCost[shotToAquire];
+            GM.Resources[ResourceType.tungsten] -= AcquisitionCost[shotToAquire];
             AquiredShot.Add((ShotType)shotToAquire);
             GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowUpgrades(shotToAquire);
         }

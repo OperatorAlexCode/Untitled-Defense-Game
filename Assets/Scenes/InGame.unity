@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWave: 0
-  PassiveGoldIncome: 50
+  PassiveIncome: 0
   InWave: 0
   Paused: 0
   PlayerHealth: 30
@@ -4066,7 +4066,7 @@ GameObject:
   - component: {fileID: 1162389198}
   - component: {fileID: 1162389197}
   m_Layer: 5
-  m_Name: GunPowder
+  m_Name: Tungsten
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4112,7 +4112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gunpowder: '
+  m_text: 'Tungsten:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5052,7 +5052,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 500 Gun
+  m_text: 500 Tungsten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6875,7 +6875,7 @@ GameObject:
   - component: {fileID: 1740710717}
   - component: {fileID: 1740710716}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6921,7 +6921,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gold:'
+  m_text: 'Iron:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8307,7 +8307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 200 Gun
+  m_text: 200 Tungsten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9170,6 +9170,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  constructionCost: 200
 --- !u!114 &3443354354446670176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9187,6 +9188,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  constructionCost: 200
 --- !u!114 &3443354354461241454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9204,6 +9206,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  constructionCost: 200
 --- !u!114 &3443354355013998743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9221,6 +9224,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  constructionCost: 200
 --- !u!114 &3443354355248393733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9238,6 +9242,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  constructionCost: 200
 --- !u!114 &3443354355347753667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9255,6 +9260,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  constructionCost: 200
 --- !u!33 &4307764858141344870
 MeshFilter:
   m_ObjectHideFlags: 0
