@@ -9170,7 +9170,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  constructionCost: 200
+  ConstructionCost: 200
+  UpgradeIncrement: 75
 --- !u!114 &3443354354446670176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9188,7 +9189,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  constructionCost: 200
+  ConstructionCost: 200
+  UpgradeIncrement: 75
 --- !u!114 &3443354354461241454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9206,7 +9208,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  constructionCost: 200
+  ConstructionCost: 200
+  UpgradeIncrement: 75
 --- !u!114 &3443354355013998743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9224,7 +9227,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  constructionCost: 200
+  ConstructionCost: 200
+  UpgradeIncrement: 75
 --- !u!114 &3443354355248393733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9242,7 +9246,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  constructionCost: 200
+  ConstructionCost: 200
+  UpgradeIncrement: 75
 --- !u!114 &3443354355347753667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9260,7 +9265,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  constructionCost: 200
+  ConstructionCost: 200
+  UpgradeIncrement: 75
 --- !u!33 &4307764858141344870
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9830,6 +9836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceAmount: 50
+  MinerLevel: 0
   MinerHealth: 0
   MinerMaxHealth: 0
   Type: 0
@@ -9959,6 +9966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceAmount: 100
+  MinerLevel: 0
   MinerHealth: 0
   MinerMaxHealth: 0
   Type: 0
@@ -10088,6 +10096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceAmount: 50
+  MinerLevel: 0
   MinerHealth: 0
   MinerMaxHealth: 0
   Type: 0
@@ -10217,6 +10226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceAmount: 75
+  MinerLevel: 0
   MinerHealth: 0
   MinerMaxHealth: 0
   Type: 1
@@ -10346,6 +10356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceAmount: 150
+  MinerLevel: 0
   MinerHealth: 0
   MinerMaxHealth: 0
   Type: 0
@@ -10475,6 +10486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceAmount: 125
+  MinerLevel: 0
   MinerHealth: 0
   MinerMaxHealth: 0
   Type: 1

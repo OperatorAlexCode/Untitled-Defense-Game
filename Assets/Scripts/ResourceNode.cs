@@ -6,7 +6,7 @@ public class ResourceNode : MonoBehaviour
 {
     // int
     public int ResourceAmount;
-    int MinerLevel;
+    public int MinerLevel;
 
     //float
     public float MinerHealth;

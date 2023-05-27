@@ -469,17 +469,6 @@ public class CannonController : MonoBehaviour
         }
     }
 
-    public void ActivateDeactivate(bool value)
-    {
-        Active = value;
-
-        if (Active)
-        {
-            MouseX = Input.GetAxis("Mouse X");
-            MouseY = Input.GetAxis("Mouse Y");
-        }
-    }
-
     public void RestockAmmo(int shotToRestock)
     {
         if (GM.Resources[ResourceType.tungsten] >= RestockPrice[shotToRestock])
@@ -495,7 +484,18 @@ public class CannonController : MonoBehaviour
         {
             GM.Resources[ResourceType.tungsten] -= AcquisitionCost[shotToAquire];
             AquiredShot.Add((ShotType)shotToAquire);
-            GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowUpgrades(shotToAquire);
+            GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowUpgrades((ShotType)shotToAquire);
+        }
+    }
+
+    public void ActivateDeactivate(bool value)
+    {
+        Active = value;
+
+        if (Active)
+        {
+            MouseX = Input.GetAxis("Mouse X");
+            MouseY = Input.GetAxis("Mouse Y");
         }
     }
 
@@ -521,8 +521,11 @@ public class CannonController : MonoBehaviour
 
         return output;
     }
+
+   
 }
 
+[Serializable]
 public enum ShotType
 {
     CannonBall,

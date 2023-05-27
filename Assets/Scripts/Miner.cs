@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Miner : MonoBehaviour
 {
-    ResourceNode ParentNode;
+    ResourceNode ParentResourceNode;
+    Node ParentNode;
+
+    void Awake()
+    {
+        ParentNode = GetComponentInParent<Node>();
+        ParentResourceNode = GetComponentInParent<ResourceNode>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (ParentNode == null)
-            ParentNode = GetComponentInParent<ResourceNode>();
+        ParentResourceNode.MinerCollisionCheck(collision);
+    }
 
-        ParentNode.MinerCollisionCheck(collision);
+    private void OnMouseDown()
+    {
+        ParentNode.OnMouseDown();
     }
 }

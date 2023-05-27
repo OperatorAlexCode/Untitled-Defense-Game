@@ -8,15 +8,17 @@ public class Node : MonoBehaviour
 {
     public Color hoverColor;
     public Color insufficientGoldColor;
+    private Color startColor;
     public Vector3 positionOffset;
     [Header("Optional")]
     private Renderer rend;
-    private Color startColor;
     public GameObject Miner;
     public GameObject hoverText;
 
     [SerializeField]
-    int constructionCost = 200;
+    int ConstructionCost = 200;
+    [SerializeField]
+    int UpgradeIncrement = 75;
 
     GameManager gameManager;
 
@@ -46,21 +48,22 @@ public class Node : MonoBehaviour
         return transform.position + positionOffset;
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-
-        if (Miner.activeSelf)
-        {
-            Debug.Log("Can not build on an existing mine!");
-            return;
-        }
-        else if (gameManager.Resources[ResourceType.iron] >= constructionCost && !gameManager.InWave)
+       
+        if (gameManager.Resources[ResourceType.iron] >= ConstructionCost && !gameManager.InWave)
         {
             Miner.SetActive(true);
             RN.BuildMiner();
-            gameManager.Resources[ResourceType.iron] -= constructionCost;
+            gameManager.Resources[ResourceType.iron] -= ConstructionCost;
+        }
+
+        else if (RN.IsMined && gameManager.Resources[ResourceType.iron] - (UpgradeIncrement * RN.MinerLevel) >= 0)
+        {
+            gameManager.Resources[ResourceType.iron] -= UpgradeIncrement * RN.MinerLevel;
+            RN.UpgradeMiner();
         }
     }
 
@@ -71,7 +74,7 @@ public class Node : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if (gameManager.Resources[ResourceType.iron] >= constructionCost)
+            if (gameManager.Resources[ResourceType.iron] >= ConstructionCost)
             {
                 rend.material.color = hoverColor;
             }

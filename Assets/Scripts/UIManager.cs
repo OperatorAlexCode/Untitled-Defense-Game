@@ -73,10 +73,10 @@ public class UIManager : MonoBehaviour
         CannonHUD.SetActive(true);
     }
 
-    public void ShowUpgrades(int shotType)
+    public void ShowUpgrades(ShotType shotType)
     {
-        AquireButtons[shotType].SetActive(false);
-        UpgradeButtons[shotType].SetActive(true);
+        AquireButtons[(int)shotType].SetActive(false);
+        UpgradeButtons[(int)shotType].SetActive(true);
     }
 
     public void ShowPauseMenu()
