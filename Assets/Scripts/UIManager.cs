@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
@@ -30,13 +31,13 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }    
+
+    }
 
     void Update()
     {
-        GoldText.text = $"Gold: {GM.Resources[ResourceType.iron]}";
-        GunPowerText.text = $"GunPowder: {GM.Resources[ResourceType.tungsten]}";
+        GoldText.text = $"Iron: {GM.Resources[ResourceType.iron]}";
+        GunPowerText.text = $"Tungsten: {GM.Resources[ResourceType.tungsten]}";
         WaveText.text = $"Wave: {GM.CurrentWave}";
         HealthText.text = $"Health: {GM.PlayerHealth}";
 
@@ -88,5 +89,16 @@ public class UIManager : MonoBehaviour
     {
         PauseMenu.SetActive(false);
         InGameUI.SetActive(true);
+    }
+
+    public void DisplayCost(int cost, ResourceType resourceType)
+    {
+        switch (resourceType)
+        {
+            case ResourceType.iron:
+                break;
+            case ResourceType.tungsten:
+                break;
+        }
     }
 }
