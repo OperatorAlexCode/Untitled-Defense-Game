@@ -109,6 +109,7 @@ public class KeyBindsSceneController : MonoBehaviour
                             GetKeyListItem(KeyToRebind.Value).transform.Find("Button/KeyName").GetComponent<TextMeshProUGUI>().text = Keys[KeyToRebind.Value].ToString();
                         }
 
+                        GetKeyListItem(KeyToRebind.Value).transform.Find("Button").GetComponent<Button>().interactable = true;
                         KeyToRebind = null;
                         break;
                     }
@@ -157,8 +158,8 @@ public class KeyBindsSceneController : MonoBehaviour
     {
         if (!KeyToRebind.HasValue)
         {
+            GetKeyListItem(index).transform.Find("Button").GetComponent<Button>().interactable = false;
             KeyToRebind = index;
-            GetKeyListItem(index).transform.Find("Button").GetComponent<Button>();
         } 
     }
 
