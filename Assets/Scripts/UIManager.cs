@@ -4,13 +4,14 @@ using System.Diagnostics;
 using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
     // TextMeshPro
-    public TextMeshProUGUI GoldText;
-    public TextMeshProUGUI GunPowerText;
+    public TextMeshProUGUI IronText;
+    public TextMeshProUGUI TungstenText;
     public TextMeshProUGUI WaveText;
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI AmmoCounter;
@@ -31,13 +32,13 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     void Update()
     {
-        GoldText.text = $"Iron: {GM.Resources[ResourceType.iron]}";
-        GunPowerText.text = $"Tungsten: {GM.Resources[ResourceType.tungsten]}";
+        IronText.text = $"Iron: {GM.Resources[ResourceType.iron]}";
+        TungstenText.text = $"Tungsten: {GM.Resources[ResourceType.tungsten]}";
         WaveText.text = $"Wave: {GM.CurrentWave}";
         HealthText.text = $"Health: {GM.PlayerHealth}";
 
@@ -96,8 +97,10 @@ public class UIManager : MonoBehaviour
         switch (resourceType)
         {
             case ResourceType.iron:
+                IronText.text = $"Iron: {GM.Resources[ResourceType.iron]} - {cost}";
                 break;
             case ResourceType.tungsten:
+                TungstenText.text = $"Tungsten: {GM.Resources[ResourceType.tungsten]} - {cost}";
                 break;
         }
     }

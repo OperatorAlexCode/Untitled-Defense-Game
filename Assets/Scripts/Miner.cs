@@ -23,4 +23,14 @@ public class Miner : MonoBehaviour
     {
         ParentNode.OnMouseDown();
     }
+
+    private void OnMouseEnter()
+    {
+        ParentNode.OnMouseEnter();
+    }
+
+    private void OnMouseExit()
+    {
+        ParentNode.OnMouseExit();
+    }
 }

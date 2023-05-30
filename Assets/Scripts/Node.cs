@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ public class Node : MonoBehaviour
     private Renderer rend;
     public GameObject Miner;
     public GameObject hoverText;
+    bool DisplayCost;
 
     [SerializeField]
     int ConstructionCost = 200;
@@ -23,6 +25,8 @@ public class Node : MonoBehaviour
     GameManager gameManager;
 
     ResourceNode RN;
+
+    UIManager UI;
 
     void Start()
     {
@@ -34,6 +38,8 @@ public class Node : MonoBehaviour
         RN = gameObject.GetComponent<ResourceNode>();
         Miner = gameObject.transform.Find("Miner").gameObject;
 
+        UI = GameObject.Find("UI Manager").GetComponent<UIManager>();
+
         //hoverText.SetActive(false);
     }
 
@@ -41,6 +47,14 @@ public class Node : MonoBehaviour
     {
         if (!RN.IsMined && Miner.activeSelf)
             Miner.SetActive(false);
+
+        if (DisplayCost)
+        {
+            if (!RN.IsMined)
+                UI.DisplayCost(ConstructionCost, ResourceType.iron);
+            else
+                UI.DisplayCost(UpgradeIncrement * RN.MinerLevel, ResourceType.iron);
+        }
     }
 
     public Vector3 GetBuildPosition()
@@ -67,7 +81,7 @@ public class Node : MonoBehaviour
         }
     }
 
-    void OnMouseEnter()
+    public void OnMouseEnter()
     {
         if (!RN.IsMined && !gameManager.InWave)
         {
@@ -84,12 +98,16 @@ public class Node : MonoBehaviour
             }
         }
 
+        DisplayCost = true;
+
         //hoverText.SetActive(true);
     }
 
-    void OnMouseExit()
+    public void OnMouseExit()
     {
         rend.material.color = startColor;
+
+        DisplayCost = false;
 
         //hoverText.SetActive(false);
     }

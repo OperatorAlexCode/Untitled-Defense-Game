@@ -658,8 +658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47012216c2825754e990d4f5b7f5b79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoldText: {fileID: 1740710716}
-  GunPowerText: {fileID: 1162389197}
+  IronText: {fileID: 1740710716}
+  TungstenText: {fileID: 1162389197}
   WaveText: {fileID: 17447585}
   HealthText: {fileID: 832773529}
   AmmoCounter: {fileID: 1922180723}
@@ -691,6 +691,8 @@ GameObject:
   - component: {fileID: 175224274}
   - component: {fileID: 175224273}
   - component: {fileID: 175224276}
+  - component: {fileID: 175224278}
+  - component: {fileID: 175224277}
   m_Layer: 5
   m_Name: CannonballDamage
   m_TagString: Untagged
@@ -833,6 +835,66 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &175224277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175224271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 175224278}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 175224278}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &175224278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175224271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 0
+  costType: 0
+  resourceType: 1
 --- !u!1 &199088550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,6 +1833,8 @@ GameObject:
   - component: {fileID: 599682735}
   - component: {fileID: 599682734}
   - component: {fileID: 599682733}
+  - component: {fileID: 599682737}
+  - component: {fileID: 599682736}
   m_Layer: 5
   m_Name: RailGunKnockback
   m_TagString: Untagged
@@ -1893,6 +1957,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599682731}
   m_CullTransparentMesh: 1
+--- !u!114 &599682736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599682731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 599682737}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 599682737}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &599682737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599682731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 2
+  costType: 1
+  resourceType: 1
 --- !u!1 &613498714
 GameObject:
   m_ObjectHideFlags: 0
@@ -3855,6 +3979,8 @@ GameObject:
   - component: {fileID: 1122773054}
   - component: {fileID: 1122773053}
   - component: {fileID: 1122773052}
+  - component: {fileID: 1122773055}
+  - component: {fileID: 1122773056}
   m_Layer: 5
   m_Name: GrapeshotAquire
   m_TagString: Untagged
@@ -3978,6 +4104,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122773050}
   m_CullTransparentMesh: 1
+--- !u!114 &1122773055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122773050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 1
+  costType: 3
+  resourceType: 1
+--- !u!114 &1122773056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122773050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1122773055}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1122773055}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1141866346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4729,6 +4915,8 @@ GameObject:
   - component: {fileID: 1296229308}
   - component: {fileID: 1296229307}
   - component: {fileID: 1296229306}
+  - component: {fileID: 1296229310}
+  - component: {fileID: 1296229309}
   m_Layer: 5
   m_Name: CannonballKnockback
   m_TagString: Untagged
@@ -4851,6 +5039,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296229304}
   m_CullTransparentMesh: 1
+--- !u!114 &1296229309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296229304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1296229310}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1296229310}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1296229310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296229304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 0
+  costType: 1
+  resourceType: 1
 --- !u!1 &1355324882
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,6 +5390,8 @@ GameObject:
   - component: {fileID: 1406316366}
   - component: {fileID: 1406316365}
   - component: {fileID: 1406316368}
+  - component: {fileID: 1406316370}
+  - component: {fileID: 1406316369}
   m_Layer: 5
   m_Name: GrapeshotRestock
   m_TagString: Untagged
@@ -5284,6 +5534,66 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1406316369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406316363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1406316370}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1406316370}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1406316370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406316363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 1
+  costType: 2
+  resourceType: 1
 --- !u!1 &1422634204
 GameObject:
   m_ObjectHideFlags: 0
@@ -5489,6 +5799,8 @@ GameObject:
   - component: {fileID: 1430210301}
   - component: {fileID: 1430210300}
   - component: {fileID: 1430210299}
+  - component: {fileID: 1430210303}
+  - component: {fileID: 1430210302}
   m_Layer: 5
   m_Name: RailGunDamage
   m_TagString: Untagged
@@ -5611,6 +5923,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430210297}
   m_CullTransparentMesh: 1
+--- !u!114 &1430210302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430210297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1430210303}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1430210303}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1430210303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430210297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 2
+  costType: 0
+  resourceType: 1
 --- !u!1 &1465251526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5960,6 +6332,8 @@ GameObject:
   - component: {fileID: 1505979774}
   - component: {fileID: 1505979773}
   - component: {fileID: 1505979772}
+  - component: {fileID: 1505979776}
+  - component: {fileID: 1505979775}
   m_Layer: 5
   m_Name: RailGunRestock
   m_TagString: Untagged
@@ -6082,6 +6456,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505979770}
   m_CullTransparentMesh: 1
+--- !u!114 &1505979775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505979770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1505979776}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1505979776}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1505979776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505979770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 2
+  costType: 2
+  resourceType: 1
 --- !u!1 &1523975824
 GameObject:
   m_ObjectHideFlags: 0
@@ -6094,6 +6528,8 @@ GameObject:
   - component: {fileID: 1523975828}
   - component: {fileID: 1523975827}
   - component: {fileID: 1523975826}
+  - component: {fileID: 1523975830}
+  - component: {fileID: 1523975829}
   m_Layer: 5
   m_Name: RailGunAcquire
   m_TagString: Untagged
@@ -6217,6 +6653,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523975824}
   m_CullTransparentMesh: 1
+--- !u!114 &1523975829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523975824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1523975830}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1523975830}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1523975830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523975824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 2
+  costType: 3
+  resourceType: 1
 --- !u!1 &1638481259
 GameObject:
   m_ObjectHideFlags: 0
@@ -6643,6 +7139,8 @@ GameObject:
   - component: {fileID: 1709977091}
   - component: {fileID: 1709977090}
   - component: {fileID: 1709977093}
+  - component: {fileID: 1709977095}
+  - component: {fileID: 1709977094}
   m_Layer: 5
   m_Name: GrapeshotDamage
   m_TagString: Untagged
@@ -6785,6 +7283,66 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1709977094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709977088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1709977095}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1709977095}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1709977095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709977088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 1
+  costType: 0
+  resourceType: 1
 --- !u!1 &1738942088
 GameObject:
   m_ObjectHideFlags: 0
@@ -7541,6 +8099,8 @@ GameObject:
   - component: {fileID: 1919175535}
   - component: {fileID: 1919175534}
   - component: {fileID: 1919175537}
+  - component: {fileID: 1919175539}
+  - component: {fileID: 1919175538}
   m_Layer: 5
   m_Name: GrapeshotKnockback
   m_TagString: Untagged
@@ -7683,6 +8243,66 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1919175538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919175532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1919175539}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1919175539}
+          m_TargetAssemblyTypeName: CostCaller, Assembly-CSharp
+          m_MethodName: Execute
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1919175539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919175532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55979932fac7b73429661301bc578118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotToUpgrade: 1
+  costType: 1
+  resourceType: 1
 --- !u!1 &1922180721
 GameObject:
   m_ObjectHideFlags: 0
@@ -9170,6 +9790,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  IronText: {fileID: 0}
+  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354354446670176
@@ -9189,6 +9811,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  IronText: {fileID: 0}
+  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354354461241454
@@ -9208,6 +9832,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  IronText: {fileID: 0}
+  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354355013998743
@@ -9227,6 +9853,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  IronText: {fileID: 0}
+  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354355248393733
@@ -9246,6 +9874,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  IronText: {fileID: 1740710716}
+  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354355347753667
@@ -9265,6 +9895,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
+  IronText: {fileID: 0}
+  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!33 &4307764858141344870
