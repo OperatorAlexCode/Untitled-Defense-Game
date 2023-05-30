@@ -39,7 +39,7 @@ public static class SceneController
 
     static public void ExitApplication()
     {
-        EditorApplication.isPlaying = false;
+        //EditorApplication.isPlaying = false;
         Application.Quit();
     }
 

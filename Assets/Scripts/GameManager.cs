@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Time.timeScale = 1;
         Resources = new Dictionary<ResourceType,int>();
 
         var resourceNames = Enum.GetNames(typeof(ResourceType));
@@ -107,11 +108,17 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().ShowPauseMenu();
+            Cursor.visible = true;
         }
         else
         {
             Time.timeScale = 1;
             GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().HidePauseMenu();
+
+            if (InWave)
+            {
+                Cursor.visible = false;
+            }
         } 
     }
 }

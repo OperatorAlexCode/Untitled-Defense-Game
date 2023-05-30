@@ -155,7 +155,7 @@ public class EnemySpawner : MonoBehaviour
         //Generates a random number to spawn different enemies based on
         float enemySpawnNumber = Random.Range(smallestRngNumber, biggestRngNumber);
 
-        GameObject enemyToSpawn = minion;
+        GameObject enemyToSpawn;
 
         if (enemySpawnNumber < 21)
         {
@@ -166,6 +166,9 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyToSpawn = giant;
         }
+
+        else
+            enemyToSpawn = minion;
 
         GameObject newEnemy = Instantiate(enemyToSpawn);
         newEnemy.transform.position = new Vector3(250, 2, Random.Range(-50, 50));

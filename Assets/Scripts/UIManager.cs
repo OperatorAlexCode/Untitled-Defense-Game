@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
