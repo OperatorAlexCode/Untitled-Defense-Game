@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWave: 0
-  PassiveIncome: 0
+  PassiveIncome: 50
   InWave: 0
   Paused: 0
   PlayerHealth: 30
@@ -9790,8 +9790,6 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  IronText: {fileID: 0}
-  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354354446670176
@@ -9811,8 +9809,6 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  IronText: {fileID: 0}
-  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354354461241454
@@ -9832,8 +9828,6 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  IronText: {fileID: 0}
-  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354355013998743
@@ -9853,8 +9847,6 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  IronText: {fileID: 0}
-  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354355248393733
@@ -9874,8 +9866,6 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  IronText: {fileID: 1740710716}
-  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!114 &3443354355347753667
@@ -9895,8 +9885,6 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   Miner: {fileID: 0}
   hoverText: {fileID: 0}
-  IronText: {fileID: 0}
-  GM: {fileID: 0}
   ConstructionCost: 200
   UpgradeIncrement: 75
 --- !u!33 &4307764858141344870
