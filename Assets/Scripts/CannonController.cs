@@ -113,7 +113,7 @@ public class CannonController : MonoBehaviour
             if (AreAnyKeysPressed(Controls.ToArray(), true) || AreMouseButtonsPressed())
             {
                 #region Shoot cannon with current shot type
-                if ((IsKeyPressed(FireKey) && Settings.KeyboardAimingMode) || (Input.GetMouseButtonDown(0) && !Settings.KeyboardAimingMode))
+                if (((IsKeyPressed(FireKey) && Settings.KeyboardAimingMode) || (Input.GetMouseButtonDown(0) && !Settings.KeyboardAimingMode)) && Time.timeScale != 0)
                 {
                     int index = (int)CurrentShot;
 
