@@ -121,9 +121,9 @@ MonoBehaviour:
   enemySpeed: 1500
   MaxRotation: 5
   canJump: 1
-  jumpFrequency: 2
+  jumpFrequency: 0.5
   jumpTimer: 0
-  jumpAmount: 1000
+  jumpAmount: 500
 --- !u!114 &3999673693169078799
 MonoBehaviour:
   m_ObjectHideFlags: 0

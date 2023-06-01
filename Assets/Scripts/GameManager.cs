@@ -55,7 +55,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (PlayerHealth <= 0)
+        {
+            PlayerPrefs.SetInt("LastBeatWave", CurrentWave);
             SceneController.LoadGameOverScene();
+        }
+            
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -116,9 +120,7 @@ public class GameManager : MonoBehaviour
             GameObject.Find("UI Manager").gameObject.GetComponent<UIManager>().HidePauseMenu();
 
             if (InWave)
-            {
                 Cursor.visible = false;
-            }
         } 
     }
 }

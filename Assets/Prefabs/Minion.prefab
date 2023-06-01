@@ -124,7 +124,7 @@ MonoBehaviour:
   Damage: 3
   AttackCooldown: 0
   despawnTimer: 5
-  knockbackResistance: 1
+  knockbackResistance: 100
   countDown: 1
   CurrentState: 0
   DeathSound: {fileID: 8300000, guid: 65c746a16caa2164aa321f95de49407a, type: 3}

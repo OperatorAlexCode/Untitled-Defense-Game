@@ -93,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
     void EnemyWaves()
     {
         
-        if (GM.CurrentWave <=5)
+        if (GM.CurrentWave < 5)
         {
             enemySpawnTimerReset = 5;
 

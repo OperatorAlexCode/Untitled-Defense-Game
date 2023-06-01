@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -71,5 +72,11 @@ public class SettingsSceneController : MonoBehaviour
         SlowDownStrength.value = Settings.SlowDownStrength;
         KeyboardAimingMode.isOn = Settings.KeyboardAimingMode;
         PlayerColor.text = ColorUtility.ToHtmlStringRGB(Settings.PlayerColor);
+    }
+
+    void ResetProgress()
+    {
+        if (PlayerPrefs.HasKey("PersonalBest"))
+            PlayerPrefs.DeleteKey("PersonalBest");
     }
 }
