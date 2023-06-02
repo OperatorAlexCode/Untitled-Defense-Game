@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
     public float enemySpeed;
     public float MaxRotation;
 
-    //Vectors for jumping
+    //Variabels for jumping
     public bool canJump;
     public float jumpFrequency = 1;
     public float jumpTimer;
@@ -25,7 +25,9 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Gives the object a rigidbody
         rb = gameObject.GetComponent<Rigidbody>();
+        //Gives jumptimer to value of jump frequency
         jumpTimer = jumpFrequency;
     }
     
@@ -36,6 +38,7 @@ public class EnemyMovement : MonoBehaviour
         //Moves the enemy if their not dead
         if (!gameObject.GetComponent<EnemyController>().IsDead())
         {
+            //Moves the enemies with the force from enemyspeed
             rb.AddTorque(movementVector * enemySpeed * Time.deltaTime);
 
             //The code runs if canjump is true and their above the games groundlevel of 5
@@ -47,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
                 //If the timer reach 0 its reset and 
                 if (jumpTimer < 0)
                 {
+                    //Adds a force on the y axis that is equivelent to jumpAmount
                     rb.AddForce(0, jumpAmount, 0);
 
                     //Resets the timer

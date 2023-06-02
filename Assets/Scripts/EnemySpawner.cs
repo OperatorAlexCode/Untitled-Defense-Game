@@ -14,9 +14,10 @@ public class EnemySpawner : MonoBehaviour
 {
     //Spawns enemies while timer is active
     public float activeWaveTimer = 20;
-    //Time Between spawned enemies  (not implemented yet)
+    //Time Between spawned enemies
     public float enemySpawnTimer = 5;
     float enemySpawnTimerReset = 5;
+    //Int values used for rng
     int smallestRngNumber = 0;
     int biggestRngNumber = 100;
 
@@ -63,6 +64,7 @@ public class EnemySpawner : MonoBehaviour
                 //Countsdown the enemyspawntimer
                 enemySpawnTimer = enemySpawnTimer -= Time.deltaTime;
 
+                //If it reaches 0
                 if (enemySpawnTimer < 0)
                 {
                     {
@@ -92,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
 
     void EnemyWaves()
     {
-        
+        //Changes the spawn frequency and rng behind which enemies appear in different waves
         if (GM.CurrentWave < 5)
         {
             enemySpawnTimerReset = 5;
@@ -157,20 +159,25 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemyToSpawn;
 
+        //If the spawn number is smaller than 21 spawns small enemies
         if (enemySpawnNumber < 21)
         {
             enemyToSpawn = charger;
         }
 
+        //If it is larger than 79 spawns big enemies
         else if (enemySpawnNumber > 79)
         {
             enemyToSpawn = giant;
         }
 
         else
+            //If its neither spawns small enemies
             enemyToSpawn = minion;
 
+        //Spawns the enemy
         GameObject newEnemy = Instantiate(enemyToSpawn);
+        //Sets it's position with random z value so they dont spawn on the same spot
         newEnemy.transform.position = new Vector3(250, 2, Random.Range(-50, 50));
     }
 

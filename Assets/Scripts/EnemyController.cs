@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // float
+    //Float variabels
     public float Health;
     public float Damage;
     public float AttackCooldown;
     public float despawnTimer = 10;
     public float knockbackResistance;
-    //If true decrease the value instead
+
+    //Countdown variabel that If true decreases the value
     public bool countDown = true;
 
-    // Other
+    //Other Variabels
     public EnemyState CurrentState;
     public AudioClip DeathSound;
     AudioSource audioSource;
@@ -21,7 +22,9 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Sets the enemy state to moving
         CurrentState = EnemyState.Moving;
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -29,7 +32,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         audioSource.volume = GameObject.Find("PlayerSettings").gameObject.GetComponent<PlayerSettings>().SfxVolume;
-        // Enemy logic
+        //Enemy logic when dead
         if (CurrentState != EnemyState.Dead)
         {
 
