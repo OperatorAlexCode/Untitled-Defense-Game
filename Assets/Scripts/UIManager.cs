@@ -91,6 +91,7 @@ public class UIManager : MonoBehaviour
         InGameUI.SetActive(true);
     }
 
+    // Displays the cost
     public void DisplayCost(int cost, ResourceType resourceType)
     {
         switch (resourceType)

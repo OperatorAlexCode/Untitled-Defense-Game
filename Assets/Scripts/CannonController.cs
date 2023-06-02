@@ -498,6 +498,7 @@ public class CannonController : MonoBehaviour
         }
     }
 
+    // Calculates the cost of each type
     public int GetCost(ShotType shotToUpgrade, CostType costType)
     {
         int output = 0;

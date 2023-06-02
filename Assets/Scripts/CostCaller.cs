@@ -20,7 +20,7 @@ public class CostCaller : MonoBehaviour
     private void Update()
     {
         if (Run)
-            UI.DisplayCost(Cannon.GetCost(shotToUpgrade, costType), resourceType);
+            UI.DisplayCost(Cannon.GetCost(shotToUpgrade, costType), resourceType); // Displays the cost using the DisplayCost method, cost is calculated from the GetCost method
     }
 
     public void Execute(bool run)

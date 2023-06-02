@@ -40,7 +40,6 @@ public class Node : MonoBehaviour
 
         UI = GameObject.Find("UI Manager").GetComponent<UIManager>();
 
-        //hoverText.SetActive(false);
     }
 
     private void Update()
@@ -100,7 +99,6 @@ public class Node : MonoBehaviour
 
         DisplayCost = true;
 
-        //hoverText.SetActive(true);
     }
 
     public void OnMouseExit()
@@ -109,6 +107,5 @@ public class Node : MonoBehaviour
 
         DisplayCost = false;
 
-        //hoverText.SetActive(false);
     }
 }
