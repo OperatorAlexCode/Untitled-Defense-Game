@@ -40,7 +40,7 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode[] ShotTypesSelectKeys = new KeyCode[] { KeyCode.Q, KeyCode.E };
     public KeyCode FireKey = KeyCode.Space;
     public KeyCode SlowDownKey = KeyCode.LeftShift;
-    public KeyCode PauseKey = KeyCode.P;
+    public KeyCode PauseKey = KeyCode.Escape;
 
     // Other
     public Color PlayerColor;

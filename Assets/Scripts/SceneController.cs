@@ -11,6 +11,7 @@ public static class SceneController
     static readonly string SettingsMenuSceneName = "SettingsMenu";
     static readonly string GameOverSceneName = "Game Over";
     static readonly string KeybindsSceneName = "KeyBinds";
+    static readonly string HowToPlaySceneName = "HowToPlay";
 
     static public void LoadGameScene()
     {
@@ -35,6 +36,11 @@ public static class SceneController
     static public void LoadKeyBindsScene()
     {
         LoadScene(KeybindsSceneName);
+    }
+
+    static public void LoadHowToPlayScene()
+    {
+        LoadScene(HowToPlaySceneName);
     }
 
     static public void ExitApplication()
